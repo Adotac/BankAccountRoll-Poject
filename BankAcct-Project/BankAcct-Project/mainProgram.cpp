@@ -4,8 +4,8 @@
 int main(void){
 
 	char acctId[CHARLIMIT];
-	const char* actReply[ACCTSELT];
-	int key=0; //left and right key function selection for account type
+	int i=0;// IDENTIFIES THE TYPE OF SAVINGS
+
 	do {
 		system("cls");
 		printf("\n\tNo account yet? Type REGISTER to create an account.");
@@ -14,24 +14,8 @@ int main(void){
 		toupper(acctId[CHARLIMIT]);
 	} while (strcmp(acctId, "REGISTER") != 0);
 	
-	printf("\n\t==========	Welcome!	==========");
-	printf("\n\n\tSelect the following types:\n");
-	strcpy(actReply[0],"[TIME]");
-	do {
-		switch (key) {
-		case LTARROW:
-			printf("\033[0;33m");
-			printf("%s",);
-			printf("\033[0m");
-			printf("    [TIME]");
-			printf("    [TRUST]");
-			printf("    [CANCEL]");
-			break;
-		case RTARROW:
 
-			break;
-		}
-	}
+	i = accountTypeReg(i);
 
 _getch();
 return 0;
