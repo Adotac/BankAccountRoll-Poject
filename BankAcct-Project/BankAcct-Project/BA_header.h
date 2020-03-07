@@ -11,8 +11,12 @@
 #define CHARLIMIT 50
 #define PLIMIT 20
 
-#define LTARROW 77
-#define RTARROW 75 
+#define ROWCOL 10 //account type 
+
+#define ACCTSELT 3
+#define LTARROW 75
+#define RTARROW 77
+#define ENTER 10
 
 #ifndef BA_header
 #define BA_header
@@ -49,6 +53,7 @@ struct AccountDetails{
 
 	
 };
+int accountTypeReg(int);
 
 void acctHistory(acctDet*, int);
 
