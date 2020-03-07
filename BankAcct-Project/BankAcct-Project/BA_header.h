@@ -4,20 +4,54 @@
 #include <time.h>
 #include <string.h>
 #include <ctype.h>
+
+#define TRUE 0
+#define FALSE 1
+
 #define CHARLIMIT 50
-#define ACCTSELT 4 //SIZE OF ARRAY actReply
-#define LTARROW 0x4B 
-#define RTARROW 0x4D 
+#define PLIMIT 20
+
+#define LTARROW 77
+#define RTARROW 75 
+
 #ifndef BA_header
 #define BA_header
 
+typedef enum Account_Type accType;
+enum Account_Type {SAVINGS, TIME, TRUST};
+
+
+typedef struct NAME name;
+struct NAME {
+	char First[CHARLIMIT];
+	char Last[CHARLIMIT];
+	char Middle[CHARLIMIT];
+
+};
+typedef struct Info info;
 struct Info {
-	char name[CHARLIMIT], city[CHARLIMIT], address[CHARLIMIT];
+	name pname;
+	char city[CHARLIMIT], address[CHARLIMIT];
 };
 
-struct type {
+typedef struct AccountDetails acctDet;
+struct AccountDetails{
+	accType type;
+	info inf;
+	char acctID[CHARLIMIT];
+	int pin;
 
+	float balance_history[PLIMIT];
+	char branch[PLIMIT][CHARLIMIT];
+	char date[PLIMIT][CHARLIMIT];
+
+	float totalBalance;
+
+	
 };
+
+void acctHistory(acctDet*, int);
+
 
 
 #endif
