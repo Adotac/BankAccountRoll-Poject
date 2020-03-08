@@ -10,17 +10,23 @@
 
 #define CHARLIMIT 50
 #define PLIMIT 20
+#define IDLIMIT 6
 
-#define ROWCOL 10 //account type 
+//interest rate percentages 
+#define SAVING_INTEREST 5 //annual
+#define TIME_INTEREST(days) ( (days<=30)?0.5 : (days<=60)?1 : (days<=180)?1.5 : (days<=360)?3 : 4 )
+#define TRUST_INTEREST 3 //annual
 
+//ASCII codes
 #define ACCTSELT 3
 #define LTARROW 75
 #define RTARROW 77
-#define ENTER 10
+#define ENTER 13
 
 #ifndef BA_header
 #define BA_header
 
+const char charGenerator[] = {"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"};
 typedef enum Account_Type accType;
 enum Account_Type {SAVINGS, TIME, TRUST};
 
@@ -35,6 +41,7 @@ struct NAME {
 typedef struct Info info;
 struct Info {
 	name pname;
+	int age;
 	char city[CHARLIMIT], address[CHARLIMIT];
 };
 
@@ -51,12 +58,17 @@ struct AccountDetails{
 
 	float totalBalance;
 
-	
+	//For Time account, the number of days
+	int termsOfPlacement; 
 };
-int accountTypeReg(int);
 
-void acctHistory(acctDet*, int);
+void upperSentence(char[]);
+void lowerSentence(char[]);
+int accountTypeReg();
 
+void SavingsAcctHistory(acctDet*, int);
+int IdChecker(char[], acctDet*);
+void acctIdGenerator(acctDet*);
 
 
 #endif

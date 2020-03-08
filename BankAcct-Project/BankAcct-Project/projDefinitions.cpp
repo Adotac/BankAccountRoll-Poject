@@ -1,7 +1,75 @@
 #include "BA_header.h"
+//FUNCTION for strings
+void upperSentence(char S_arr[]){
+	int length = strlen(S_arr);
+
+	for(int i = 0; i < length; i++){
+		if(S_arr[i] == ' ' || S_arr[i] == '\0')
+			continue;
+
+		S_arr[i] = toupper(S_arr[i]);
+	}
+
+}
+void lowerSentence(char S_arr[]){
+	int length = strlen(S_arr);
+
+	for(int i = 0; i < length; i++){
+		if(S_arr[i] == ' ' || S_arr[i] == '\0')
+			continue;
+
+		S_arr[i] = tolower(S_arr[i]);
+	}
+
+}
+///
+void acctIdGenerator(acctDet *aD){
+	int glength = strlen(charGenerator);
+	int gIndex = rand() % glength;
+
+	char gTemp, arrTemp[IDLIMIT];
+	//genrate ID
+	for(int i = 0; i < IDLIMIT; i++){
+		gIndex = rand() % glength;
+		gTemp = charGenerator[gIndex];
+
+		arrTemp[i] = gTemp;
+		
+	}
+
+	//search vacant slot
+	for(int x = 0; x < PLIMIT; x++){
+		if( aD[x].acctID[0] == '\0' ){
+			strcpy(aD[x].acctID, arrTemp);
+			printf("\nYour ACCOUNT ID is: %s", aD[x].acctID);
+			printf("\nDo not forget it!");
+			break;
+		}
+		else{
+			printf("\nServers are full, please comeback some another day to continue!\n");
+		
+		}
+	}
+
+	
+
+}
+
+int IdChecker(char inpID[], acctDet *aD){
+	
+	for(int i = 0; i < PLIMIT; i++){
+		if( strcmp(inpID, aD[i].acctID) == 0){
+			return TRUE;
+		}
+	
+	}
+return FALSE; //if account doesnt exist
+}
+
+
 
 //Savings Account
-void acctHistory(acctDet *aD, int accIndex){
+void SavingsAcctHistory(acctDet *aD, int accIndex){
 	aD[accIndex].totalBalance = 0;
 	printf("\n||DEPOSITED AMOUNT\t||BRANCH\t||DATE\n");
 
@@ -19,13 +87,17 @@ void acctHistory(acctDet *aD, int accIndex){
 
 	
 }
-int accountTypeReg(int i){
-	char key = LTARROW, time[CHARLIMIT], savings[CHARLIMIT], trust[CHARLIMIT], cancel[CHARLIMIT];
 
-	strcpy(time, "[TIME]");
-	strcpy(savings, "[SAVINGS]");
-	strcpy(trust, "[TRUST]");
-	strcpy(cancel, "[CANCEL]");
+//Money options
+void SavingMoneyOpts(acctDet *aD){
+
+
+
+}
+
+int accountTypeReg(){
+	int i = 0;
+	char key = LTARROW;
 
 	while (key != ENTER) {
 		system("cls");
@@ -34,38 +106,38 @@ int accountTypeReg(int i){
 
 		switch (i) {
 		case 0: printf("\033[0;33m");
-			printf("%s   ", time);
+			printf("%s   ", "[TIME]");
 			printf("\033[0m");
-			printf("%s   ", savings);
-			printf("%s   ", trust);
-			printf("%s", cancel);
+			printf("%s   ", "[SAVINGS]");
+			printf("%s   ", "[TRUST]");
+			printf("%s", "[CANCEL]");
 			break;
 		case 1:
-			printf("%s   ", time);
+			printf("%s   ", "[TIME]");
 			printf("\033[0;33m");
-			printf("%s   ", savings);
+			printf("%s   ", "[SAVINGS]");
 			printf("\033[0m");
-			printf("%s   ", trust);
-			printf("%s", cancel);
+			printf("%s   ", "[TRUST]");
+			printf("%s", "[CANCEL]");
 			break;
-		case 2:printf("%s   ", time);
-			printf("%s   ", savings);
+		case 2:printf("%s   ", "[TIME]");
+			printf("%s   ", "[SAVINGS]");
 			printf("\033[0;33m");
-			printf("%s   ", trust);
+			printf("%s   ", "[TRUST]");
 			printf("\033[0m");
-			printf("%s", cancel);
+			printf("%s", "[CANCEL]");
 			break;
-		case 3:printf("%s   ", time);
-			printf("%s   ", savings);
-			printf("%s   ", trust);
+		case 3:printf("%s   ", "[TIME]");
+			printf("%s   ", "[SAVINGS]");
+			printf("%s   ", "[TRUST]");
 			printf("\033[0;33m");
-			printf("%s", cancel);
+			printf("%s", "[CANCEL]");
 			printf("\033[0m");
 			break;
 		}
 		printf(" |\n\t==========================================");
 
-		key = _getch();
+		key = getch();
 		switch (key) {
 		case LTARROW:
 			i--;
