@@ -7,6 +7,7 @@
 
 #define TRUE 0
 #define FALSE 1
+#define NA -1
 
 #define CHARLIMIT 50
 #define PLIMIT 20
@@ -14,7 +15,7 @@
 
 //interest rate percentages 
 #define SAVING_INTEREST 5 //annual
-#define TIME_INTEREST(days) ( (days<=30)?0.5 : (days<=60)?1 : (days<=180)?1.5 : (days<=360)?3 : 4 )
+#define TIME_INTEREST(days) ( (days<=30)?0.5 : (days<=60)?1 : (days<=180)?1.5 : (days<=360)?3 : 4 ) //depends on days
 #define TRUST_INTEREST 3 //annual
 
 //ASCII codes
@@ -51,24 +52,37 @@ struct AccountDetails{
 	info inf;
 	char acctID[CHARLIMIT];
 	int pin;
+	float totalBalance;
 
+	//For savings account
 	float balance_history[PLIMIT];
 	char branch[PLIMIT][CHARLIMIT];
 	char date[PLIMIT][CHARLIMIT];
-
-	float totalBalance;
+	
 
 	//For Time account, the number of days
 	int termsOfPlacement; 
+
+	//
 };
+
+void textHighllght(char[]);
 
 void upperSentence(char[]);
 void lowerSentence(char[]);
 int accountTypeReg();
 
+int SavingMoneyOpts();
 void SavingsAcctHistory(acctDet*, int);
+void displaySavings(acctDet*, char[]);
+
 int IdChecker(char[], acctDet*);
 void acctIdGenerator(acctDet*);
+
+int getAcctIndex(acctDet*, char[]);
+int pinGenerator();
+int pinChecker(char[], int, acctDet*);
+
 
 
 #endif

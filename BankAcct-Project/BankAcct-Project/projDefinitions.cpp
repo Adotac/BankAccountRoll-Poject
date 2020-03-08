@@ -1,4 +1,14 @@
 #include "BA_header.h"
+
+
+//UI Functions
+void textHighllght(char s[]){
+	
+	printf("\033[0;33m");
+	printf("%s   ", s);
+	printf("\033[0m");
+}
+
 //FUNCTION for strings
 void upperSentence(char S_arr[]){
 	int length = strlen(S_arr);
@@ -54,20 +64,128 @@ void acctIdGenerator(acctDet *aD){
 	
 
 }
+int pinGenerator(){
+	int pin = 0;
+	//4 digit code||max		min			min
+	pin = rand() % (9999 - 1000 + 1) + 1000;
+	return pin;
+}
 
-int IdChecker(char inpID[], acctDet *aD){
-	
+int getAcctIndex(acctDet *aD, char inpId[]){
 	for(int i = 0; i < PLIMIT; i++){
-		if( strcmp(inpID, aD[i].acctID) == 0){
-			return TRUE;
+		if(strcmp(inpId, aD[i].acctID) == 0){
+			return i;
 		}
-	
 	}
+	//if nothing
+	return NA;
+}
+int IdChecker(char inpId[], acctDet *aD){
+	int i = getAcctIndex(aD, inpId);
+	
+	if( strcmp(inpId, aD[i].acctID) == 0 && i != NA ){
+		return TRUE;
+	}
+	
+	
 return FALSE; //if account doesnt exist
 }
 
+int pinChecker(char inpId[], int inPin, acctDet *aD){
+	int i = getAcctIndex(aD, inpId);
+	
+	if(strcmp(inpId, aD[i].acctID) == 0 && i != NA ){
+		if(aD[i].pin == inPin){
+			return TRUE;
+		}
+	}
+	
+
+	return FALSE;
+}
+
+//display savings account
+void displaySavings(acctDet *aD, char inpId[]){
+	int index = getAcctIndex(aD, inpId);
+	int opt = NULL, sFlag = TRUE;
 
 
+	if(index != NA){
+		do{
+			SavingsAcctHistory(aD, index);
+			opt = SavingMoneyOpts();
+			switch(opt){
+			case 1://Deposit
+
+				break;
+			case 2://Withdraw
+
+				break;
+			case NULL:
+				break;
+			default:
+				//loop
+				break;
+			
+			}
+		}while(sFlag == TRUE);
+		
+	}
+	
+}
+// S Money options
+int SavingMoneyOpts(){
+	char key;
+	int iCtr = 1;
+
+	do{
+
+		switch(iCtr){
+		case 1:
+			textHighllght("[DEPOSIT]");
+			printf("\t");
+			printf("[WITHDRAW]");
+			printf("\t");
+			printf("[EXIT]");
+			break;
+		case 2:
+			printf("[DEPOSIT]");
+			printf("\t");
+			textHighllght("[WITHDRAW]");
+			printf("\t");
+			printf("[EXIT]");
+			break;
+		case 3:
+			printf("[DEPOSIT]");
+			printf("\t");
+			printf("[WITHDRAW]");
+			printf("\t");
+			textHighllght("[EXIT]");
+			break;
+		
+		}
+
+		key = getch();
+		switch(key){
+		case LTARROW:
+			iCtr--;
+			if(iCtr < 1)
+				iCtr = 1;
+			break;
+		case RTARROW:
+			iCtr++;
+			if(iCtr > 3)
+				iCtr = 3;
+			break;
+		case ENTER:
+			return iCtr;
+			break;
+		}
+	
+	printf("\r");
+	}while(key != ENTER);
+
+}
 //Savings Account
 void SavingsAcctHistory(acctDet *aD, int accIndex){
 	aD[accIndex].totalBalance = 0;
@@ -82,18 +200,15 @@ void SavingsAcctHistory(acctDet *aD, int accIndex){
 			break;
 
 
-		printf("\n||Total: %15.2f", aD[accIndex].totalBalance);
+		printf("\n||Total: %15.2f\n\n", aD[accIndex].totalBalance);
 	}
 
 	
 }
 
-//Money options
-void SavingMoneyOpts(acctDet *aD){
 
 
 
-}
 
 int accountTypeReg(){
 	int i = 0;
@@ -101,41 +216,36 @@ int accountTypeReg(){
 
 	while (key != ENTER) {
 		system("cls");
-		printf("\n\t==========	 Welcome!	==========");
-		printf("\n\t|\tSelect the following types:\t |\n\t|");
+		printf("\n\t===============	 Welcome!	================");
+		printf("\n\t|\t   Select the following types:		|\n\t|");
 
 		switch (i) {
-		case 0: printf("\033[0;33m");
-			printf("%s   ", "[TIME]");
-			printf("\033[0m");
+		case 0: 
+			textHighllght("    [TIME]");
 			printf("%s   ", "[SAVINGS]");
 			printf("%s   ", "[TRUST]");
 			printf("%s", "[CANCEL]");
 			break;
 		case 1:
-			printf("%s   ", "[TIME]");
-			printf("\033[0;33m");
-			printf("%s   ", "[SAVINGS]");
-			printf("\033[0m");
+			printf("    %s   ", "[TIME]");
+			textHighllght("[SAVINGS]");
 			printf("%s   ", "[TRUST]");
 			printf("%s", "[CANCEL]");
 			break;
-		case 2:printf("%s   ", "[TIME]");
+		case 2:
+			printf("    %s   ", "[TIME]");
 			printf("%s   ", "[SAVINGS]");
-			printf("\033[0;33m");
-			printf("%s   ", "[TRUST]");
-			printf("\033[0m");
+			textHighllght("[TRUST]");
 			printf("%s", "[CANCEL]");
 			break;
-		case 3:printf("%s   ", "[TIME]");
+		case 3:
+			printf("    %s   ", "[TIME]");
 			printf("%s   ", "[SAVINGS]");
 			printf("%s   ", "[TRUST]");
-			printf("\033[0;33m");
-			printf("%s", "[CANCEL]");
-			printf("\033[0m");
+			textHighllght("[CANCEL]");
 			break;
 		}
-		printf(" |\n\t==========================================");
+		printf("\t|\n\t================================================");
 
 		key = getch();
 		switch (key) {
