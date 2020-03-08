@@ -117,11 +117,9 @@ void displaySavings(acctDet *aD, char inpId[]){
 			switch(opt){
 			case 1://Deposit
 
-				sFlag = FALSE;
 				break;
 			case 2://Withdraw
 
-				sFlag = FALSE;
 				break;
 			case NULL:
 				break;

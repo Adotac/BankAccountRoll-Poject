@@ -1,21 +1,23 @@
-﻿Build started 03/08/2020 4:21:54 PM.
+﻿Build started 03/06/2020 2:31:01 PM.
      1>Project "D:\BridgeAdmin\CodeFiles\VS Projects\BankAccountRoll-Poject\BankAcct-Project\BankAcct-Project\BankAcct-Project.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\Program Files\VisualStudioUltimate 2012\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt projDefinitions.cpp
+         D:\Program Files\VisualStudioUltimate 2012\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt mainProgram.cpp projDefinitions.cpp
          projDefinitions.cpp
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\projdefinitions.cpp(53): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         mainProgram.cpp
+     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\mainprogram.cpp(9): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\projdefinitions.cpp(170): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
+     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\mainprogram.cpp(10): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
+     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\mainprogram.cpp(15): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
                  d:\program files\visualstudioultimate 2012\vc\include\conio.h(131) : see declaration of 'getch'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\projdefinitions.cpp(252): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\conio.h(131) : see declaration of 'getch'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\projdefinitions.cpp(190): warning C4715: 'SavingMoneyOpts' : not all control paths return a value
+         Generating Code...
        Link:
          D:\Program Files\VisualStudioUltimate 2012\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\BridgeAdmin\CodeFiles\VS Projects\BankAccountRoll-Poject\BankAcct-Project\Debug\BankAcct-Project.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\BridgeAdmin\CodeFiles\VS Projects\BankAccountRoll-Poject\BankAcct-Project\Debug\BankAcct-Project.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\BridgeAdmin\CodeFiles\VS Projects\BankAccountRoll-Poject\BankAcct-Project\Debug\BankAcct-Project.lib" /MACHINE:X86 Debug\mainProgram.obj
          Debug\projDefinitions.obj
+         Debug\UIdefinitions.obj
          BankAcct-Project.vcxproj -> D:\BridgeAdmin\CodeFiles\VS Projects\BankAccountRoll-Poject\BankAcct-Project\Debug\BankAcct-Project.exe
      1>Done Building Project "D:\BridgeAdmin\CodeFiles\VS Projects\BankAccountRoll-Poject\BankAcct-Project\BankAcct-Project\BankAcct-Project.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:02.40
+Time Elapsed 00:00:01.37

@@ -21,6 +21,9 @@
     <ClCompile Include="projDefinitions.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="UIdefinitions.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BA_header.h">
