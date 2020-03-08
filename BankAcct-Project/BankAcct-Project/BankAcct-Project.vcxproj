@@ -80,7 +80,6 @@
   <ItemGroup>
     <ClCompile Include="mainProgram.cpp" />
     <ClCompile Include="projDefinitions.cpp" />
-    <ClCompile Include="UIdefinitions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BA_header.h" />
