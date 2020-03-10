@@ -65,6 +65,7 @@ struct AccountDetails{
 
 	//
 };
+int accountTypeReg(int);
 
 void textHighllght(char[]);
 
