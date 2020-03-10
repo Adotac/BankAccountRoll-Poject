@@ -32,7 +32,24 @@ void lowerSentence(char S_arr[]){
 	}
 
 }
-///
+
+int scanIfDigits(char S_arr[]){
+	int slength = strlen(S_arr);
+	int ctr = 0;
+	for(int i = 0; i < slength; i++){
+		if(isdigit(S_arr[i]) != 0){
+			ctr++;
+		}
+	}
+
+	if(ctr == slength)
+		return TRUE;
+	else
+		return FALSE;
+}
+
+
+
 void acctIdGenerator(acctDet *aD){
 	int glength = strlen(charGenerator);
 	int gIndex = rand() % glength;
@@ -73,7 +90,7 @@ int pinGenerator(){
 
 int getAcctIndex(acctDet *aD, char inpId[]){
 	for(int i = 0; i < PLIMIT; i++){
-		if(strcmp(inpId, aD[i].acctID) == 0){
+		if(strcmp(inpId, aD[i].acctID) == 0 && strcmp(inpId,"\n") != 0){
 			return i;
 		}
 	}
@@ -112,16 +129,23 @@ void displaySavings(acctDet *aD, char inpId[]){
 
 	if(index != NA){
 		do{
+			flushall();
 			SavingsAcctHistory(aD, index);
 			opt = SavingMoneyOpts();
 			switch(opt){
 			case 1://Deposit
-
+				SavingsDeposit(aD, index);
+			
 				break;
 			case 2://Withdraw
-
+				SavingsWithdraw(aD, index);
+				
 				break;
-			case NULL:
+			case 3:
+				MoneyTransfer(aD, index);
+				break;
+			case 4:
+				sFlag = FALSE;
 				break;
 			default:
 				//loop
@@ -146,6 +170,8 @@ int SavingMoneyOpts(){
 			printf("\t");
 			printf("[WITHDRAW]");
 			printf("\t");
+			printf("[MONEY TRANSFER]");
+			printf("\t");
 			printf("[EXIT]");
 			break;
 		case 2:
@@ -153,12 +179,25 @@ int SavingMoneyOpts(){
 			printf("\t");
 			textHighllght("[WITHDRAW]");
 			printf("\t");
+			printf("[MONEY TRANSFER]");
+			printf("\t");
 			printf("[EXIT]");
 			break;
 		case 3:
 			printf("[DEPOSIT]");
 			printf("\t");
 			printf("[WITHDRAW]");
+			printf("\t");
+			textHighllght("[MONEY TRANSFER]");
+			printf("\t");
+			printf("[EXIT]");
+			break;
+		case 4:
+			printf("[DEPOSIT]");
+			printf("\t");
+			printf("[WITHDRAW]");
+			printf("\t");
+			printf("[MONEY TRANSFER]");
 			printf("\t");
 			textHighllght("[EXIT]");
 			break;
@@ -174,8 +213,8 @@ int SavingMoneyOpts(){
 			break;
 		case RTARROW:
 			iCtr++;
-			if(iCtr > 3)
-				iCtr = 3;
+			if(iCtr > 4)
+				iCtr = 4;
 			break;
 		case ENTER:
 			return iCtr;
@@ -197,18 +236,123 @@ void SavingsAcctHistory(acctDet *aD, int accIndex){
 			aD[accIndex].totalBalance += aD[accIndex].balance_history[i];
 		}
 		else
-			break;
-
-
-		printf("\n||Total: %15.2f\n\n", aD[accIndex].totalBalance);
+			break;	
 	}
-
+	printf("\n||Total: %15.2f\n\n", aD[accIndex].totalBalance);
 	
 }
+void SavingsDeposit(acctDet *aD, int index){
+	char scannedAmount[CHARLIMIT];
+	float amount;
+	system("cls");
+	printf("\nHow much do you want to Deposit: ");
+	gets(scannedAmount);
 
+	if(scanIfDigits(scannedAmount) == TRUE){
+	amount = atof(scannedAmount);
 
+		//search slot in history
+		for(int i = 0; i < PLIMIT; i++){
+			if(aD[index].balance_history[i] == NULL){
+				aD[index].balance_history[i] = amount;
+				strcpy(aD[index].branch[i], currentBranch);
+				strcpy(aD[index].date[i], __DATE__);
+				break;
+			}
+		}
+	}
+	else{
+		printf("\n\nError input, returning to previous...");
+	}
+	
+	getch();
+	system("cls");
+	
+}
+void SavingsWithdraw(acctDet *aD, int index){
+	char scannedAmount[CHARLIMIT];
+	float amount;
+	system("cls");
+	printf("\nHow much do you want to Withdraw: ");
+	gets(scannedAmount);
+	
+	if(scanIfDigits(scannedAmount) == TRUE){
+		amount = atof(scannedAmount);
+		amount = -amount; //negative
 
+		//search slot in history
+		for(int i = 0; i < PLIMIT; i++){
+			if(aD[index].balance_history[i] == NULL){
+				aD[index].balance_history[i] = amount;
+				strcpy(aD[index].branch[i], currentBranch);
+				strcpy(aD[index].date[i], __DATE__);
+				break;
+			}
+		}
+	}
+	else{
+		printf("\n\nError input, returning to previous...");
+	}
+	
+	
+	getch();
+	system("cls");
+}
 
+void MoneyTransfer(acctDet *aD, int index){
+	char inputT_ID[IDLIMIT], scannedAmount[CHARLIMIT];
+	float transferAmt;
+	int t_index;
+	system("cls");
+	printf("\nEnter the ACCOUNT ID of which you want to Transfer to: ");
+	gets(inputT_ID);
+	upperSentence(inputT_ID);
+	printf("\nHow much amount do you want to Transfer: ");
+	gets(scannedAmount);
+
+	
+	transferAmt = atof(scannedAmount);
+
+	//search account
+	t_index = getAcctIndex(aD, inputT_ID);
+	if(t_index != NA){
+		//search slot in history for user
+		for(int i = 0; i < PLIMIT; i++){
+			if(aD[index].balance_history[i] == NULL){
+				aD[index].balance_history[i] = (-transferAmt);
+				strcpy(aD[index].branch[i], currentBranch);
+				strcpy(aD[index].date[i], __DATE__);
+				break;
+			}
+		}
+			//search slot in history for user to transfer 
+		if(aD[t_index].type == SAVINGS){
+			for(int i = 0; i < PLIMIT; i++){
+				if(aD[t_index].balance_history[i] == NULL){
+					aD[t_index].balance_history[i] = transferAmt;
+					strcpy(aD[t_index].branch[i], currentBranch);
+					strcpy(aD[t_index].date[i], __DATE__);
+					break;
+				}
+			}
+		}
+		else if(aD[t_index].type == TIME){
+		
+		//
+		}
+		else if(aD[t_index].type == TRUST){
+		//
+		}
+		printf("\nTransfer Successful!");
+		printf("\n%.2f has been tranferred to %s", transferAmt, inputT_ID);
+	}
+	else{
+		printf("\nAccount doesn't exist!! ");
+	}
+	
+	getch();
+	system("cls");
+}
 
 int accountTypeReg(){
 	int i = 0;

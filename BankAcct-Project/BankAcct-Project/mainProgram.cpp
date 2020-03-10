@@ -19,8 +19,9 @@ int main(void){
 	
 
 	do {//main loop
+		fflush(stdout);
 		system("cls");
-		printf("%d", pinGenerator() );
+		
 		printf("\n\tNo account yet? Type REGISTER to create an account.");
 		printf("\n\n\tAccount ID: ");
 		gets_s(inputId, CHARLIMIT);
@@ -41,7 +42,7 @@ int main(void){
 			displaySavings(account, inputId);
 		
 
-			loginFlag = FALSE;
+			//loginFlag = FALSE;
 		}
 		else{ 
 			printf("\n:::::Account doesn't exist!!:::::");

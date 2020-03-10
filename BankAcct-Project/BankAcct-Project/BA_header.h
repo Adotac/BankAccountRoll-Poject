@@ -19,7 +19,6 @@
 #define TRUST_INTEREST 3 //annual
 
 //ASCII codes
-#define ACCTSELT 3
 #define LTARROW 75
 #define RTARROW 77
 #define ENTER 13
@@ -27,6 +26,7 @@
 #ifndef BA_header
 #define BA_header
 
+const char currentBranch[] = {"Basak"};
 const char charGenerator[] = {"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"};
 typedef enum Account_Type accType;
 enum Account_Type {SAVINGS, TIME, TRUST};
@@ -75,6 +75,9 @@ int accountTypeReg();
 int SavingMoneyOpts();
 void SavingsAcctHistory(acctDet*, int);
 void displaySavings(acctDet*, char[]);
+void SavingsDeposit(acctDet*, int);
+void SavingsWithdraw(acctDet*, int);
+void MoneyTransfer(acctDet*, int);
 
 int IdChecker(char[], acctDet*);
 void acctIdGenerator(acctDet*);
@@ -82,7 +85,6 @@ void acctIdGenerator(acctDet*);
 int getAcctIndex(acctDet*, char[]);
 int pinGenerator();
 int pinChecker(char[], int, acctDet*);
-
-
+int scanIfDigits(char[]);
 
 #endif
