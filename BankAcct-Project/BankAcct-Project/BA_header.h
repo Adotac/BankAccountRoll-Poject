@@ -13,15 +13,14 @@
 #define PLIMIT 20
 #define IDLIMIT 6
 
-//interest rate percentages 
-#define SAVING_INTEREST 5 //annual
-#define TIME_INTEREST(days) ( (days<=30)?0.5 : (days<=60)?1 : (days<=180)?1.5 : (days<=360)?3 : 4 ) //depends on days
-#define TRUST_INTEREST 3 //annual
-
 //ASCII codes
 #define LTARROW 75
 #define RTARROW 77
 #define ENTER 13
+
+#define INTEREST 0.03
+#define TAX 0.8
+#define DEPOSIT 150000
 
 #ifndef BA_header
 #define BA_header
@@ -31,6 +30,8 @@ const char charGenerator[] = {"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"};
 typedef enum Account_Type accType;
 enum Account_Type {SAVINGS, TIME, TRUST};
 
+typedef enum Trust_Benefits Tbenefits;
+enum Trust_Benefits {Null, SUCCESSOR, SCHOLARSHIP, RETIREMENT_PLAN};
 
 typedef struct NAME name;
 struct NAME {
@@ -46,32 +47,59 @@ struct Info {
 	char city[CHARLIMIT], address[CHARLIMIT];
 };
 
+typedef struct TrustDetails Trust;
+struct TrustDetails{
+
+	Tbenefits benefitType;
+	char benefit[CHARLIMIT];
+	Info beneficiaryInfo;
+
+	char assets[PLIMIT][CHARLIMIT];
+	char assetHistDate[PLIMIT][CHARLIMIT];
+	float assetAmount;
+	float assetAmtHistory[PLIMIT];
+
+	char liabilities[PLIMIT][CHARLIMIT];
+	char liabHistDate[PLIMIT][CHARLIMIT];
+	float liabAmount;
+	float liabAmtHistory[PLIMIT];
+
+	char linkedBankAcct[IDLIMIT]; // Time||savings account
+};
+
+typedef struct SavingsDetails Savings;
+struct SavingsDetails{
+	float balance_history[PLIMIT];
+	char branch[PLIMIT][CHARLIMIT];
+	char date[PLIMIT][CHARLIMIT];
+};
+
 typedef struct AccountDetails acctDet;
 struct AccountDetails{
 	accType type;
 	info inf;
-	char acctID[CHARLIMIT];
+	char acctID[IDLIMIT];
 	int pin;
 	float totalBalance;
 
-	//For savings account
-	float balance_history[PLIMIT];
-	char branch[PLIMIT][CHARLIMIT];
-	char date[PLIMIT][CHARLIMIT];
-	
-
-	//For Time account, the number of days
-	int termsOfPlacement; 
-
-	//
+	//IF TYPE IS X ->
+	//X = savings account
+	Savings savingType;
+	//X = Time account
+	Trust trustType;
 };
 
-void textHighllght(char[]);
 
+
+
+
+void textHighllght(char[]);
 void upperSentence(char[]);
 void lowerSentence(char[]);
 int accountTypeReg();
 
+
+//savings account
 int SavingMoneyOpts();
 void SavingsAcctHistory(acctDet*, int);
 void displaySavings(acctDet*, char[]);
@@ -79,12 +107,37 @@ void SavingsDeposit(acctDet*, int);
 void SavingsWithdraw(acctDet*, int);
 void MoneyTransfer(acctDet*, int);
 
-int IdChecker(char[], acctDet*);
-void acctIdGenerator(acctDet*);
+//trust account
+void createTrust(acctDet*, int);
+void displayTrust(acctDet*, char[]);
+void AddLedger(acctDet *aD, int index);
+void DeleteLedger(acctDet *aD, int index);
+void LinkAccount(acctDet *aD, int index);
 
+
+
+//general functions
+int IdChecker(char[], acctDet*);
+void acctGenerator(acctDet*);
 int getAcctIndex(acctDet*, char[]);
 int pinGenerator();
 int pinChecker(char[], int, acctDet*);
 int scanIfDigits(char[]);
+int optLedger();
+int optBenefits();
+int optYesNo();
+
+//Time deposit
+void calculateTimeDeposit();
+void showMoney(float *principalMoney);
+void checkMoney(float *principalMoney);
+void depositMoney(float *principalMoney);
+void withrawMoney(float *principalMoney);
+void TimeDeposit(acctDet *aD, int index);
+
+void deleteAccount(acctDet*, int);
+
+
+void getInfo(acctDet*, int);
 
 #endif

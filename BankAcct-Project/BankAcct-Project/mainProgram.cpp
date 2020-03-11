@@ -6,43 +6,66 @@ int main(void){
 
 	acctDet *account;
 	account = (acctDet*)calloc(sizeof(acctDet), PLIMIT);
-	int loginFlag = TRUE, regType, pinInput;;
+	//*account = InitializeAcct();
+
+	int loginFlag = TRUE, pinInput = NULL, a_index = NULL;
 	
 	char *inputId;
 	inputId = (char*)calloc(sizeof(char), CHARLIMIT);
 	
 	//temporary account dont delete
 	strcpy(account[0].acctID, "ADMIN");
-	account[0].balance_history[0] = 50000;
-	strcpy(account[0].branch[0], "basak");
-	strcpy(account[0].date[0], __DATE__);
+	account[0].type = TIME;
+	account[0].savingType.balance_history[0] = 50000;
+	strcpy(account[0].savingType.branch[0], "basak");
+	strcpy(account[0].savingType.date[0], __DATE__);
 	
 
 	do {//main loop
-		fflush(stdout);
+		fflush(stdin);
 		system("cls");
 		
 		printf("\n\tNo account yet? Type REGISTER to create an account.");
 		printf("\n\n\tAccount ID: ");
-		gets_s(inputId, CHARLIMIT);
+		gets(inputId);
 		upperSentence(inputId);
 
-		if( strcmp(inputId, "REGISTER") == 0){
-			regType = accountTypeReg(); // dont delete, important!
-			
-
+		if( strcmp(inputId, "REGISTER") == 0){	
+			acctGenerator(account);	
 			//dire ang flow sa 1-4
 		}
 		else if(IdChecker(inputId, account) == TRUE){
-			
+			fflush(stdin);
+			printf("\n\tPIN: ");
+			scanf(" %d", &pinInput);
 			//ari na ang pin input
-			//if(pinChecker(inputId, pinInput, account) == TRUE){
+			if(pinChecker(inputId, pinInput, account) == TRUE){
 				//ari na sulod tanan after login
-			//}
-			displaySavings(account, inputId);
+				a_index = getAcctIndex(account, inputId);
+				switch(account[a_index].type){
+				case TIME:
+					TimeDeposit(account, a_index);
+					break;
+				case SAVINGS:
+					displaySavings(account, inputId);
+					break;
+				case TRUST:
+					displayTrust(account, inputId);
+					break;
+				}
+			}
+			else{
+				printf("\nACCOUNT ID or PIN doesn't match");
+				getch();
+				continue;
+			}
+			
 		
 
-			//loginFlag = FALSE;
+			
+		}
+		else if(strcmp(inputId, "EXIT") == 0){
+			loginFlag = FALSE;
 		}
 		else{ 
 			printf("\n:::::Account doesn't exist!!:::::");
@@ -59,12 +82,6 @@ int main(void){
 
 	free(account);
 	free(inputId);
-	///////////////////////////Reserve this line for a function dont delete
-	//account[0].balance_history[0] = 50000;
-	//strcpy(account[0].branch[0], "basak");
-	//strcpy(account[0].date[0], __DATE__);
-	//acctHistory(account, 0);
-	getch();
 	return 0;
 }
 	
