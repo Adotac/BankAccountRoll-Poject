@@ -89,10 +89,6 @@ struct AccountDetails{
 	Trust trustType;
 };
 
-
-
-
-
 void textHighllght(char[]);
 void upperSentence(char[]);
 void lowerSentence(char[]);
