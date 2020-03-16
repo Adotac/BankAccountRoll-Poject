@@ -88,7 +88,10 @@ struct AccountDetails{
 	//X = Time account
 	Trust trustType;
 };
-
+int optTrust();
+int optLedger();
+int optBenefits();
+int optYesNo();
 void textHighllght(char[]);
 void upperSentence(char[]);
 void lowerSentence(char[]);
@@ -119,9 +122,7 @@ int getAcctIndex(acctDet*, char[]);
 int pinGenerator();
 int pinChecker(char[], int, acctDet*);
 int scanIfDigits(char[]);
-int optLedger();
-int optBenefits();
-int optYesNo();
+
 
 //Time deposit
 void calculateTimeDeposit();
