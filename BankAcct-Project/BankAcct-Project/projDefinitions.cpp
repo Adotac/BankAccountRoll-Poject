@@ -1,19 +1,6 @@
 #include "BA_header.h"
 
-//Savings Account
-void acctHistory(acctDet *aD, int accIndex){
-	aD[accIndex].totalBalance = 0;
-	printf("\n||DEPOSITED AMOUNT\t||BRANCH\t||DATE\n");
 
-<<<<<<< HEAD
-	for(int i = 0; i < PLIMIT; i++){
-		if(aD[accIndex].balance_history[i] != NULL){
-			printf("\n||%15.2f\t||%10s\t||%5s", aD[accIndex].balance_history[i], aD[accIndex].branch[i], aD[accIndex].date[i]);
-			aD[accIndex].totalBalance += aD[accIndex].balance_history[i];
-		}
-		else
-			break;
-=======
 
 
 //FUNCTION for strings
@@ -48,61 +35,167 @@ int scanIfDigits(char S_arr[]){
 			ctr++;
 		}
 	}
->>>>>>> d3997c5... Functions being arranged
+
+	if(ctr == slength)
+		return TRUE;
+	else
+		return FALSE;
+}
 
 
-		printf("\n||Total: %15.2f", aD[accIndex].totalBalance);
+
+void acctGenerator(acctDet *aD){
+	int pin, regType;
+	int glength = strlen(charGenerator);
+	int gIndex = rand() % glength;
+
+	regType = accountTypeReg(); // dont delete, important!
+
+	char gTemp, *arrTemp;
+	arrTemp = (char*)calloc(sizeof(char),IDLIMIT);
+	
+	//genrate ID
+	for(int i = 0; i < IDLIMIT; i++){
+		gIndex = rand() % glength;
+		gTemp = charGenerator[gIndex];
+
+		arrTemp[i] = gTemp;
+		
 	}
 
+	//search vacant slot
+	for(int x = 0; x < PLIMIT; x++){
+		if(regType == 3){
+			break;
+		}
+		else if( strcmp(aD[x].acctID, "\0") == 0 ){
+			memcpy(aD[x].acctID, arrTemp, IDLIMIT);
+			printf("\nYour ACCOUNT ID is: %6s", aD[x].acctID);
+			pin = pinGenerator();
+			aD[x].pin = pin;
+			printf("\nYour ACCOUNT PIN is: %4d", aD[x].pin);
+			printf("\nDo not forget it!");
+			getch();
+			getInfo(aD, x);
+			switch(regType){
+			case 0://time
+				aD[x].type = TIME;
+				break;
+			case 1://saving
+				aD[x].type = SAVINGS;
+				break;
+			case 2://trust
+				aD[x].type = TRUST;
+				break;
+			}
+			
+			break;
+		}
+		else if(x == PLIMIT - 1){
+			printf("\nServers are full, please comeback some another day to continue!\n");
+			break;
+		}
+	
+	}
 	
 }
-int accountTypeReg(int i){
-	char key = LTARROW, time[CHARLIMIT], savings[CHARLIMIT], trust[CHARLIMIT], cancel[CHARLIMIT];
+int pinGenerator(){
+	int pin = 0;
+	//4 digit code||max		min			min
+	pin = rand() % (9999 - 1000 + 1) + 1000;
+	return pin;
+}
 
-	strcpy(time, "[TIME]");
-	strcpy(savings, "[SAVINGS]");
-	strcpy(trust, "[TRUST]");
-	strcpy(cancel, "[CANCEL]");
+int getAcctIndex(acctDet *aD, char inpId[]){
+	for(int i = 0; i < PLIMIT; i++){
+		if(strcmp(inpId, aD[i].acctID) == 0 && strcmp(inpId,"\n") != 0){
+			return i;
+		}
+	}
+	//if nothing
+	return NA;
+}
+int IdChecker(char inpId[], acctDet *aD){
+	int i = getAcctIndex(aD, inpId);
+	
+	if(i != NA && memcmp(inpId, aD[i].acctID, IDLIMIT) == 0){
+		return TRUE;
+	}
+	
+	
+return FALSE; //if account doesnt exist
+}
+
+int pinChecker(char inpId[], int inPin, acctDet *aD){
+	int i = getAcctIndex(aD, inpId);
+	
+	if(strcmp(inpId, aD[i].acctID) == 0 && i != NA ){
+		if(aD[i].pin == inPin){
+			return TRUE;
+		}
+	}
+	
+
+	return FALSE;
+}
+void deleteAccount(acctDet *aD, int index){
+	
+	strcpy(aD[index].acctID, "");
+	//info
+	strcpy(aD[index].inf.address, "");
+	strcpy(aD[index].inf.city, "");
+	//name
+	strcpy(aD[index].inf.pname.First, "");
+	strcpy(aD[index].inf.pname.Last, "");
+	strcpy(aD[index].inf.pname.Middle, "");
+
+	//savings
+	aD[index].totalBalance = NULL;
+	aD[index].pin = NULL;
+	for(int i = 0; i < PLIMIT; i++){
+		aD[index].savingType.balance_history[i] = NULL;
+		strcpy(aD[index].savingType.branch[i], "");
+		strcpy(aD[index].savingType.date[i], "");
+	}
+}
+int accountTypeReg(){
+	int i = 0;
+	char key = LTARROW;
 
 	while (key != ENTER) {
 		system("cls");
-		printf("\n\t==========	 Welcome!	==========");
-		printf("\n\t|\tSelect the following types:\t |\n\t|");
+		printf("\n\t===============	 Welcome!	================");
+		printf("\n\t|\t   Select the following types:		|\n\t|");
 
 		switch (i) {
-		case 0: printf("\033[0;33m");
-			printf("%s   ", time);
-			printf("\033[0m");
-			printf("%s   ", savings);
-			printf("%s   ", trust);
-			printf("%s", cancel);
+		case 0: 
+			textHighllght("    [TIME]");
+			printf("%s   ", "[SAVINGS]");
+			printf("%s   ", "[TRUST]");
+			printf("%s", "[CANCEL]");
 			break;
 		case 1:
-			printf("%s   ", time);
-			printf("\033[0;33m");
-			printf("%s   ", savings);
-			printf("\033[0m");
-			printf("%s   ", trust);
-			printf("%s", cancel);
+			printf("    %s   ", "[TIME]");
+			textHighllght("[SAVINGS]");
+			printf("%s   ", "[TRUST]");
+			printf("%s", "[CANCEL]");
 			break;
-		case 2:printf("%s   ", time);
-			printf("%s   ", savings);
-			printf("\033[0;33m");
-			printf("%s   ", trust);
-			printf("\033[0m");
-			printf("%s", cancel);
+		case 2:
+			printf("    %s   ", "[TIME]");
+			printf("%s   ", "[SAVINGS]");
+			textHighllght("[TRUST]");
+			printf("%s", "[CANCEL]");
 			break;
-		case 3:printf("%s   ", time);
-			printf("%s   ", savings);
-			printf("%s   ", trust);
-			printf("\033[0;33m");
-			printf("%s", cancel);
-			printf("\033[0m");
+		case 3:
+			printf("    %s   ", "[TIME]");
+			printf("%s   ", "[SAVINGS]");
+			printf("%s   ", "[TRUST]");
+			textHighllght("[CANCEL]");
 			break;
 		}
-		printf(" |\n\t==========================================");
+		printf("\t|\n\t================================================");
 
-		key = _getch();
+		key = getch();
 		switch (key) {
 		case LTARROW:
 			i--;
@@ -119,13 +212,7 @@ int accountTypeReg(int i){
 		}
 	}
 	return i;
-<<<<<<< HEAD
 }
-=======
-}
-
-
-
 
 void getInfo(acctDet *aD, int index) {
 
@@ -157,5 +244,30 @@ void getInfo(acctDet *aD, int index) {
 	
 }
 
+//admin functions
+void adminPanel(acctDet *aD){
+	system("cls");
 
->>>>>>> d3997c5... Functions being arranged
+	
+	
+	switch(optAdmin()){
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	case 4:
+		break;
+	case 5:
+		break;
+	case 6:
+		break;
+	}
+
+}
+
+void displayAllAcct(){
+
+
+}

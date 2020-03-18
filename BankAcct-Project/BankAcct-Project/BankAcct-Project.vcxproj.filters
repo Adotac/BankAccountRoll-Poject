@@ -24,8 +24,6 @@
     <ClCompile Include="UIdefinitions.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-<<<<<<< HEAD
-=======
     <ClCompile Include="savingsDefintions.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
@@ -35,7 +33,6 @@
     <ClCompile Include="trustDefinitions.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
->>>>>>> d3997c5... Functions being arranged
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BA_header.h">

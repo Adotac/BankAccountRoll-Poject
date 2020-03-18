@@ -1,7 +1,5 @@
 #include "BA_header.h"
 
-<<<<<<< HEAD
-=======
 //UI Functions
 void textHighllght(char s[]){
 	
@@ -234,5 +232,118 @@ int optBenefits(){
 	}while(key != ENTER);
 }
 
+int optAdmin(){
+	char key;
+	int iCtr = 1;
 
->>>>>>> d3997c5... Functions being arranged
+	do{
+		printf("\n\n\t\t\t\t\t");
+		printf("-----ADMIN PANEL------");
+
+		switch(iCtr){
+		case 1:
+			printf("\n");printf("\t\t\t\t");
+			textHighllght("[DISPLAY ALL ACCOUNTS]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[DISPLAY ALL SAVINGS ACCOUNTS]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[DISPLAY ALL TIME ACCOUNTS]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[DISPLAY ALL TRUST ACCOUNTS]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[SEARCH AN ACCOUNT]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[EXIT]");
+			break;
+		case 2:
+			printf("\n");printf("\t\t\t\t");
+			printf("[DISPLAY ALL ACCOUNTS]");
+			printf("\n");printf("\t\t\t\t");
+			textHighllght("[DISPLAY ALL SAVINGS ACCOUNTS]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[DISPLAY ALL TIME ACCOUNTS]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[DISPLAY ALL TRUST ACCOUNTS]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[SEARCH AN ACCOUNT]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[EXIT]");
+			break;
+		case 3:
+			printf("\n");printf("\t\t\t\t");
+			printf("[DISPLAY ALL ACCOUNTS]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[DISPLAY ALL SAVINGS ACCOUNTS]");
+			printf("\n");printf("\t\t\t\t");
+			textHighllght("[DISPLAY ALL TIME ACCOUNTS]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[DISPLAY ALL TRUST ACCOUNTS]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[SEARCH AN ACCOUNT]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[EXIT]");
+			break;
+		case 4:
+			printf("\n");printf("\t\t\t\t");
+			printf("[DISPLAY ALL ACCOUNTS]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[DISPLAY ALL SAVINGS ACCOUNTS]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[DISPLAY ALL TIME ACCOUNTS]");
+			printf("\n");printf("\t\t\t\t");
+			textHighllght("[DISPLAY ALL TRUST ACCOUNTS]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[SEARCH AN ACCOUNT]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[EXIT]");
+			break;
+		case 5:
+			printf("\n");printf("\t\t\t\t");
+			printf("[DISPLAY ALL ACCOUNTS]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[DISPLAY ALL SAVINGS ACCOUNTS]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[DISPLAY ALL TIME ACCOUNTS]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[DISPLAY ALL TRUST ACCOUNTS]");
+			printf("\n");printf("\t\t\t\t");
+			textHighllght("[SEARCH AN ACCOUNT]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[EXIT]");
+			break;
+		case 6:
+			printf("\n");printf("\t\t\t\t");
+			printf("[DISPLAY ALL ACCOUNTS]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[DISPLAY ALL SAVINGS ACCOUNTS]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[DISPLAY ALL TIME ACCOUNTS]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[DISPLAY ALL TRUST ACCOUNTS]");
+			printf("\n");printf("\t\t\t\t");
+			printf("[SEARCH AN ACCOUNT]");
+			printf("\n");printf("\t\t\t\t");
+			textHighllght("[EXIT]");
+			break;
+		}
+
+		key = getch();
+		switch(key){
+		case UPARROW:
+			iCtr--;
+			if(iCtr < 1)
+				iCtr = 1;
+			break;
+		case DWARROW:
+			iCtr++;
+			if(iCtr > 6)
+				iCtr = 6;
+			break;
+		case ENTER:
+			return iCtr;
+			break;
+		}
+	
+		system("cls");
+	}while(key != ENTER);
+}

@@ -5,25 +5,36 @@
 #include <string.h>
 #include <ctype.h>
 
+#define ADMPASS "0987654321"
 #define TRUE 0
 #define FALSE 1
+#define NA -1
 
 #define CHARLIMIT 50
-#define PLIMIT 20
+#define PLIMIT 100
+#define IDLIMIT 6
 
-#define ROWCOL 10 //account type 
-
-#define ACCTSELT 3
+//ASCII codes
 #define LTARROW 75
 #define RTARROW 77
-#define ENTER 10
+#define UPARROW 72
+#define DWARROW 80
+#define ENTER 13
+
+#define INTEREST 0.03
+#define TAX 0.8
+#define DEPOSIT 150000
 
 #ifndef BA_header
 #define BA_header
 
+const char currentBranch[] = {"Basak"};
+const char charGenerator[] = {"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"};
 typedef enum Account_Type accType;
 enum Account_Type {SAVINGS, TIME, TRUST};
 
+typedef enum Trust_Benefits Tbenefits;
+enum Trust_Benefits {Null, SUCCESSOR, SCHOLARSHIP, RETIREMENT_PLAN};
 
 typedef struct NAME name;
 struct NAME {
@@ -35,17 +46,43 @@ struct NAME {
 typedef struct Info info;
 struct Info {
 	name pname;
+	int age;
 	char city[CHARLIMIT], address[CHARLIMIT];
+};
+
+typedef struct TrustDetails Trust;
+struct TrustDetails{
+
+	Tbenefits benefitType;
+	char benefit[CHARLIMIT];
+	Info beneficiaryInfo;
+
+	char assets[PLIMIT][CHARLIMIT];
+	char assetHistDate[PLIMIT][CHARLIMIT];
+	float assetAmount;
+	float assetAmtHistory[PLIMIT];
+
+	char liabilities[PLIMIT][CHARLIMIT];
+	char liabHistDate[PLIMIT][CHARLIMIT];
+	float liabAmount;
+	float liabAmtHistory[PLIMIT];
+
+	char linkedBankAcct[IDLIMIT]; // Time||savings account
+};
+
+typedef struct SavingsDetails Savings;
+struct SavingsDetails{
+	float balance_history[PLIMIT];
+	char branch[PLIMIT][CHARLIMIT];
+	char date[PLIMIT][CHARLIMIT];
 };
 
 typedef struct AccountDetails acctDet;
 struct AccountDetails{
 	accType type;
 	info inf;
-	char acctID[CHARLIMIT];
+	char acctID[IDLIMIT];
 	int pin;
-<<<<<<< HEAD
-=======
 	float totalBalance;
 
 	//IF TYPE IS X ->
@@ -58,6 +95,7 @@ int optTrust();
 int optLedger();
 int optBenefits();
 int optYesNo();
+int optAdmin();
 void textHighllght(char[]);
 void upperSentence(char[]);
 void lowerSentence(char[]);
@@ -79,15 +117,8 @@ void AddLedger(acctDet *aD, int index);
 void DeleteLedger(acctDet *aD, int index);
 void LinkAccount(acctDet *aD, int index);
 
->>>>>>> d3997c5... Functions being arranged
 
-	float balance_history[PLIMIT];
-	char branch[PLIMIT][CHARLIMIT];
-	char date[PLIMIT][CHARLIMIT];
 
-<<<<<<< HEAD
-	float totalBalance;
-=======
 //general functions
 int IdChecker(char[], acctDet*);
 void acctGenerator(acctDet*);
@@ -96,14 +127,21 @@ int pinGenerator();
 int pinChecker(char[], int, acctDet*);
 int scanIfDigits(char[]);
 
->>>>>>> d3997c5... Functions being arranged
 
-	
-};
-int accountTypeReg(int);
+//Time deposit
+void calculateTimeDeposit();
+void showMoney(float *principalMoney);
+void checkMoney(float *principalMoney);
+void depositMoney(float *principalMoney);
+void withrawMoney(float *principalMoney);
+void TimeDeposit(acctDet *aD, int index);
 
-void acctHistory(acctDet*, int);
+void deleteAccount(acctDet*, int);
+
+void getInfo(acctDet*, int);
 
 
+//admin
+void adminPanel(acctDet*);
 
 #endif

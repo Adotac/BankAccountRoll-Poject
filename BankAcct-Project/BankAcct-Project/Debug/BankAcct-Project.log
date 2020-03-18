@@ -1,205 +1,31 @@
-<<<<<<< HEAD
-﻿Build started 03/06/2020 2:31:01 PM.
+﻿Build started 03/19/2020 3:56:13 PM.
      1>Project "D:\BridgeAdmin\CodeFiles\VS Projects\BankAccountRoll-Poject\BankAcct-Project\BankAcct-Project\BankAcct-Project.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\Program Files\VisualStudioUltimate 2012\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt mainProgram.cpp projDefinitions.cpp
-         projDefinitions.cpp
+         D:\Program Files\VisualStudioUltimate 2012\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt mainProgram.cpp
          mainProgram.cpp
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\mainprogram.cpp(9): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\mainprogram.cpp(10): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\mainprogram.cpp(15): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\conio.h(131) : see declaration of 'getch'
-         Generating Code...
-       Link:
-         D:\Program Files\VisualStudioUltimate 2012\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\BridgeAdmin\CodeFiles\VS Projects\BankAccountRoll-Poject\BankAcct-Project\Debug\BankAcct-Project.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\BridgeAdmin\CodeFiles\VS Projects\BankAccountRoll-Poject\BankAcct-Project\Debug\BankAcct-Project.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\BridgeAdmin\CodeFiles\VS Projects\BankAccountRoll-Poject\BankAcct-Project\Debug\BankAcct-Project.lib" /MACHINE:X86 Debug\mainProgram.obj
-         Debug\projDefinitions.obj
-=======
-﻿Build started 03/16/2020 2:05:58 PM.
-     1>Project "D:\BridgeAdmin\CodeFiles\VS Projects\BankAccountRoll-Poject\BankAcct-Project\BankAcct-Project\BankAcct-Project.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         D:\Program Files\VisualStudioUltimate 2012\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt projDefinitions.cpp savingsDefintions.cpp timeDefinitions.cpp trustDefinitions.cpp UIdefinitions.cpp
-         UIdefinitions.cpp
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\uidefinitions.cpp(33): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\conio.h(131) : see declaration of 'getch'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\uidefinitions.cpp(101): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\conio.h(131) : see declaration of 'getch'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\uidefinitions.cpp(146): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\conio.h(131) : see declaration of 'getch'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\uidefinitions.cpp(214): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\conio.h(131) : see declaration of 'getch'
-         trustDefinitions.cpp
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(61): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\mainprogram.cpp(5): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\mainprogram.cpp(18): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(218) : see declaration of 'fopen'
+     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\mainprogram.cpp(33): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(63): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(65): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(67): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(95): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(97): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(99): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(101): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(130): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(137): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(149): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(159): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(178): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(181): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(188): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\conio.h(131) : see declaration of 'getch'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(225): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(227): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(229): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(232): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(234): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(236): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\mainprogram.cpp(44): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  d:\program files\visualstudioultimate 2012\vc\include\stdio.h(290) : see declaration of 'scanf'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(246): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(248): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(250): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(252): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(282): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(284): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(286): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\trustdefinitions.cpp(288): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-         timeDefinitions.cpp
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\timedefinitions.cpp(18): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\mainprogram.cpp(55): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  d:\program files\visualstudioultimate 2012\vc\include\stdio.h(290) : see declaration of 'scanf'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\timedefinitions.cpp(38): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(290) : see declaration of 'scanf'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\timedefinitions.cpp(41): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
+     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\mainprogram.cpp(74): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
                  d:\program files\visualstudioultimate 2012\vc\include\conio.h(131) : see declaration of 'getch'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\timedefinitions.cpp(54): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(290) : see declaration of 'scanf'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\timedefinitions.cpp(56): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(290) : see declaration of 'scanf'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\timedefinitions.cpp(61): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\timedefinitions.cpp(72): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
+     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\mainprogram.cpp(87): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
                  d:\program files\visualstudioultimate 2012\vc\include\conio.h(131) : see declaration of 'getch'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\timedefinitions.cpp(49): warning C4101: 'withrawM' : unreferenced local variable
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\timedefinitions.cpp(48): warning C4101: 'totalMoney' : unreferenced local variable
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\timedefinitions.cpp(48): warning C4101: 'interest' : unreferenced local variable
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\timedefinitions.cpp(86): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(290) : see declaration of 'scanf'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\timedefinitions.cpp(87): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\timedefinitions.cpp(92): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\conio.h(131) : see declaration of 'getch'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\timedefinitions.cpp(110): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(290) : see declaration of 'scanf'
-         savingsDefintions.cpp
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\savingsdefintions.cpp(12): warning C4996: 'flushall': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _flushall. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(712) : see declaration of 'flushall'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\savingsdefintions.cpp(88): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\conio.h(131) : see declaration of 'getch'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\savingsdefintions.cpp(130): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\savingsdefintions.cpp(133): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\savingsdefintions.cpp(139): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\savingsdefintions.cpp(140): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\savingsdefintions.cpp(149): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\conio.h(131) : see declaration of 'getch'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\savingsdefintions.cpp(158): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\savingsdefintions.cpp(161): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\savingsdefintions.cpp(168): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\savingsdefintions.cpp(169): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\savingsdefintions.cpp(179): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\conio.h(131) : see declaration of 'getch'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\savingsdefintions.cpp(190): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\savingsdefintions.cpp(193): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\savingsdefintions.cpp(196): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\savingsdefintions.cpp(208): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\savingsdefintions.cpp(209): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\savingsdefintions.cpp(216): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\savingsdefintions.cpp(217): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\savingsdefintions.cpp(242): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\conio.h(131) : see declaration of 'getch'
-         projDefinitions.cpp
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\projdefinitions.cpp(75): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\conio.h(131) : see declaration of 'getch'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\projdefinitions.cpp(140): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\projdefinitions.cpp(142): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\projdefinitions.cpp(143): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\projdefinitions.cpp(145): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\projdefinitions.cpp(146): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\projdefinitions.cpp(147): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\projdefinitions.cpp(154): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\projdefinitions.cpp(155): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\string.h(110) : see declaration of 'strcpy'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\projdefinitions.cpp(195): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\conio.h(131) : see declaration of 'getch'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\projdefinitions.cpp(223): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\projdefinitions.cpp(227): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\projdefinitions.cpp(231): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\projdefinitions.cpp(237): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(290) : see declaration of 'scanf'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\projdefinitions.cpp(240): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\projdefinitions.cpp(242): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\visualstudioultimate 2012\vc\include\stdio.h(261) : see declaration of 'gets'
-         Generating Code...
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\savingsdefintions.cpp(108): warning C4715: 'SavingMoneyOpts' : not all control paths return a value
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\uidefinitions.cpp(166): warning C4715: 'optLedger' : not all control paths return a value
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\uidefinitions.cpp(233): warning C4715: 'optBenefits' : not all control paths return a value
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\uidefinitions.cpp(53): warning C4715: 'optYesNo' : not all control paths return a value
-     1>d:\bridgeadmin\codefiles\vs projects\bankaccountroll-poject\bankacct-project\bankacct-project\uidefinitions.cpp(122): warning C4715: 'optTrust' : not all control paths return a value
        Link:
          D:\Program Files\VisualStudioUltimate 2012\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\BridgeAdmin\CodeFiles\VS Projects\BankAccountRoll-Poject\BankAcct-Project\Debug\BankAcct-Project.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\BridgeAdmin\CodeFiles\VS Projects\BankAccountRoll-Poject\BankAcct-Project\Debug\BankAcct-Project.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\BridgeAdmin\CodeFiles\VS Projects\BankAccountRoll-Poject\BankAcct-Project\Debug\BankAcct-Project.lib" /MACHINE:X86 Debug\mainProgram.obj
          Debug\projDefinitions.obj
          Debug\savingsDefintions.obj
          Debug\timeDefinitions.obj
          Debug\trustDefinitions.obj
->>>>>>> d3997c5... Functions being arranged
          Debug\UIdefinitions.obj
          BankAcct-Project.vcxproj -> D:\BridgeAdmin\CodeFiles\VS Projects\BankAccountRoll-Poject\BankAcct-Project\Debug\BankAcct-Project.exe
      1>Done Building Project "D:\BridgeAdmin\CodeFiles\VS Projects\BankAccountRoll-Poject\BankAcct-Project\BankAcct-Project\BankAcct-Project.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-<<<<<<< HEAD
-Time Elapsed 00:00:01.37
-=======
-Time Elapsed 00:00:11.27
->>>>>>> d3997c5... Functions being arranged
+Time Elapsed 00:00:02.91
