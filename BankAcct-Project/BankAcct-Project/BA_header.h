@@ -44,12 +44,59 @@ struct AccountDetails{
 	info inf;
 	char acctID[CHARLIMIT];
 	int pin;
+<<<<<<< HEAD
+=======
+	float totalBalance;
+
+	//IF TYPE IS X ->
+	//X = savings account
+	Savings savingType;
+	//X = Time account
+	Trust trustType;
+};
+int optTrust();
+int optLedger();
+int optBenefits();
+int optYesNo();
+void textHighllght(char[]);
+void upperSentence(char[]);
+void lowerSentence(char[]);
+int accountTypeReg();
+
+
+//savings account
+int SavingMoneyOpts();
+void SavingsAcctHistory(acctDet*, int);
+void displaySavings(acctDet*, char[]);
+void SavingsDeposit(acctDet*, int);
+void SavingsWithdraw(acctDet*, int);
+void MoneyTransfer(acctDet*, int);
+
+//trust account
+void createTrust(acctDet*, int);
+void displayTrust(acctDet*, char[]);
+void AddLedger(acctDet *aD, int index);
+void DeleteLedger(acctDet *aD, int index);
+void LinkAccount(acctDet *aD, int index);
+
+>>>>>>> d3997c5... Functions being arranged
 
 	float balance_history[PLIMIT];
 	char branch[PLIMIT][CHARLIMIT];
 	char date[PLIMIT][CHARLIMIT];
 
+<<<<<<< HEAD
 	float totalBalance;
+=======
+//general functions
+int IdChecker(char[], acctDet*);
+void acctGenerator(acctDet*);
+int getAcctIndex(acctDet*, char[]);
+int pinGenerator();
+int pinChecker(char[], int, acctDet*);
+int scanIfDigits(char[]);
+
+>>>>>>> d3997c5... Functions being arranged
 
 	
 };

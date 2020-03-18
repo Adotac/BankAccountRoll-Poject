@@ -5,6 +5,7 @@ void acctHistory(acctDet *aD, int accIndex){
 	aD[accIndex].totalBalance = 0;
 	printf("\n||DEPOSITED AMOUNT\t||BRANCH\t||DATE\n");
 
+<<<<<<< HEAD
 	for(int i = 0; i < PLIMIT; i++){
 		if(aD[accIndex].balance_history[i] != NULL){
 			printf("\n||%15.2f\t||%10s\t||%5s", aD[accIndex].balance_history[i], aD[accIndex].branch[i], aD[accIndex].date[i]);
@@ -12,6 +13,42 @@ void acctHistory(acctDet *aD, int accIndex){
 		}
 		else
 			break;
+=======
+
+
+//FUNCTION for strings
+void upperSentence(char S_arr[]){
+	int length = strlen(S_arr);
+
+	for(int i = 0; i < length; i++){
+		if(S_arr[i] == ' ' || S_arr[i] == '\0')
+			continue;
+
+		S_arr[i] = toupper(S_arr[i]);
+	}
+
+}
+void lowerSentence(char S_arr[]){
+	int length = strlen(S_arr);
+
+	for(int i = 0; i < length; i++){
+		if(S_arr[i] == ' ' || S_arr[i] == '\0')
+			continue;
+
+		S_arr[i] = tolower(S_arr[i]);
+	}
+
+}
+
+int scanIfDigits(char S_arr[]){
+	int slength = strlen(S_arr);
+	int ctr = 0;
+	for(int i = 0; i < slength; i++){
+		if(isdigit(S_arr[i]) != 0){
+			ctr++;
+		}
+	}
+>>>>>>> d3997c5... Functions being arranged
 
 
 		printf("\n||Total: %15.2f", aD[accIndex].totalBalance);
@@ -82,4 +119,43 @@ int accountTypeReg(int i){
 		}
 	}
 	return i;
+<<<<<<< HEAD
 }
+=======
+}
+
+
+
+
+void getInfo(acctDet *aD, int index) {
+
+	system("cls");
+	printf("\n ===============   Please Input Information Below   ===============");
+	fflush(stdin);
+	printf("\n\n[First Name]: ");  
+	gets(aD[index].inf.pname.First);
+	upperSentence(aD[index].inf.pname.First);
+	fflush(stdin);
+	printf("[Last Name]: ");
+	gets(aD[index].inf.pname.Last);
+	upperSentence(aD[index].inf.pname.Last);
+	fflush(stdin);
+	printf("[Middle Name]: ");
+	gets(aD[index].inf.pname.Middle);
+	upperSentence(aD[index].inf.pname.Middle);
+	
+	
+	fflush(stdin);
+	printf("\n[Age]: ");
+	scanf(" %d", &aD[index].inf.age);
+	fflush(stdin);
+	printf("\n[City]: ");
+	gets(aD[index].inf.city);
+	printf("\n[Address]: ");
+	gets(aD[index].inf.address);
+
+	
+}
+
+
+>>>>>>> d3997c5... Functions being arranged

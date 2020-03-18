@@ -80,6 +80,12 @@
   <ItemGroup>
     <ClCompile Include="mainProgram.cpp" />
     <ClCompile Include="projDefinitions.cpp" />
+<<<<<<< HEAD
+=======
+    <ClCompile Include="savingsDefintions.cpp" />
+    <ClCompile Include="timeDefinitions.cpp" />
+    <ClCompile Include="trustDefinitions.cpp" />
+>>>>>>> d3997c5... Functions being arranged
     <ClCompile Include="UIdefinitions.cpp" />
   </ItemGroup>
   <ItemGroup>
