@@ -80,9 +80,6 @@
   <ItemGroup>
     <ClCompile Include="mainProgram.cpp" />
     <ClCompile Include="projDefinitions.cpp" />
-    <ClCompile Include="savingsDefintions.cpp" />
-    <ClCompile Include="timeDefinitions.cpp" />
-    <ClCompile Include="trustDefinitions.cpp" />
     <ClCompile Include="UIdefinitions.cpp" />
   </ItemGroup>
   <ItemGroup>
