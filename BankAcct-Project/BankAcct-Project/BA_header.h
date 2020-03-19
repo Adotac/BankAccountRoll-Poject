@@ -16,7 +16,17 @@
 #define ACCTSELT 3
 #define LTARROW 75
 #define RTARROW 77
+<<<<<<< HEAD
 #define ENTER 10
+=======
+#define UPARROW 72
+#define DNARROW 80
+#define ENTER 13
+
+#define INTEREST 0.03
+#define TAX 0.8
+#define DEPOSIT 150000
+>>>>>>> efa6f1f... UI DEVELOPED
 
 #ifndef BA_header
 #define BA_header
