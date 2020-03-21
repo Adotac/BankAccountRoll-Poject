@@ -1,41 +1,72 @@
 #include "BA_header.h"
 
 
-void displayTrust(acctDet *aD, char inpuId[]){
-	int index = getAcctIndex(aD, inpuId);
+void displayTrust(char inpuId[], acctDet *aD, Trust* trD, Savings *svD, Time *tiD, FILE *acdb, FILE *trdb, FILE *svdb, FILE *tidb){
 	int flag = TRUE;
 	
+	if(FindIdFileSetter(inpuId, "FR, FA", trdb, trD, acdb, aD) != TRUE){
+		printf("\n\n\nError! Corrupted Account");
+		getch();
+		return;
+	}
+
 	do{
 		system("cls");
-		printf("\n%s %s %s", aD[index].inf.pname.First, aD[index].inf.pname.Middle, aD[index].inf.pname.Last);
+		printf("\n%s %s %s", aD->First, aD->Middle, aD->Last);
+		
+		printf("\n\n------------ASSETS----------------\n");
 		printf("\n     ||DESCRIPTION\t\t||AMOUNT\t\t||DATE\t\t||");
-		printf("\n------------ASSETS----------------\n");
 		for(int x = 0; x < PLIMIT; x++){
-			if(aD[index].trustType.assetAmtHistory[x] != NULL){
-				printf("\n[%2d] %11s\t\t||%6.2f\t\t||%s",x+1, aD[index].trustType.assets[x], aD[index].trustType.assetAmtHistory[x], aD[index].trustType.assetHistDate[x]);
+			if(trD->assetAmtHistory[x] != NULL){
+				printf("\n[%2d] %11s\t\t||%6.2f\t\t||%s",x+1, trD->assets[x], trD->assetAmtHistory[x], trD->assetHistDate[x]);
 			
 			}
 		}
-		printf("\nTotal Assets: %.2f", aD[index].trustType.assetAmount);
+		printf("\nTotal Assets: %.2f", trD->assetAmount);
 
-		printf("\n------------LIABILITIES----------------\n");
+		printf("\n\n\n----------LIABILITIES----------------\n");
+		printf("\n     ||DESCRIPTION\t\t||AMOUNT\t\t||DATE\t\t||");
 		for(int x = 0; x < PLIMIT; x++){
-			if(aD[index].trustType.liabAmtHistory[x] != NULL){
-				printf("\n[%2d] %11s\t\t||%6.2f\t\t||%s",x+1, aD[index].trustType.liabilities[x], aD[index].trustType.liabAmtHistory[x], aD[index].trustType.liabAmtHistory[x]);
+			if(trD->liabAmtHistory[x] != NULL){
+				printf("\n[%2d] %11s\t\t||%6.2f\t\t||%s",x+1, trD->liabilities[x], trD->liabAmtHistory[x], trD->liabAmtHistory[x]);
 				
 			}
 		}
-		printf("\nTotal Assets: %.2f\n\n\n", aD[index].trustType.liabAmount);
+		printf("\nTotal Liabilities: %.2f", trD->liabAmount);
 		
+		
+		if(strcmp(trD->acctID, SNULL) != 0){
+			if(FindIdFileSetter(trD->acctID, "FA", acdb, aD) == TRUE)
+			printf("\nLinked Account: %s [%s]", trD->acctID, typeIdentifier(trD->linkedtype));
+			
+			switch(trD->linkedtype){
+			case SAVINGS:
+				if(FindIdFileSetter(trD->linkedBankAcct, "FS", svdb, svD) == TRUE){
+					trD->totalBalance += svD->totalBalance;
+				}
+				break;
+			case TIME:
+				if(FindIdFileSetter(trD->linkedBankAcct, "FI", tidb, tiD) == TRUE){
+					trD->totalBalance += tiD->totalBalance;
+				}
+				break;
+			}
+		}
+		else{
+			printf("\nLinked Account: NONE");
+		}
+		
+		trD->totalBalance = trD->assetAmount - trD->liabAmount;
+		printf("\n\nTotal NetAmount\n\n\n: %.2f", trD->totalBalance);
 		switch(optTrust()){
 		case 1:
-			AddLedger(aD, index);
+			AddLedger(&trD, inpuId);
 			break;
 		case 2:
-			DeleteLedger(aD, index);
+			DeleteLedger(&trD, inpuId);
 			break;
 		case 3:
-			LinkAccount(aD, index);
+			LinkAccount(&trD, aD, acdb);
 			break;
 		case 4:
 			flag = FALSE;
@@ -45,7 +76,7 @@ void displayTrust(acctDet *aD, char inpuId[]){
 }
 
 
-void AddLedger(acctDet *aD, int index){
+void AddLedger(Trust** trD, char userId[]){
 	int loopChoice = TRUE;
 	char scannedAmount[CHARLIMIT];
 	printf("\n\n");
@@ -55,17 +86,17 @@ void AddLedger(acctDet *aD, int index){
 		for(int x = 0; x < PLIMIT && loopChoice == TRUE; x++){
 		
 		fflush(stdin);
-		if(aD[index].trustType.assetAmtHistory[x] == NULL){
+		if((*trD)->assetAmtHistory[x] == NULL){
 				printf("\nInput all your assets you want to entrust\n");
 				printf("\nAsset[%d] Description: ", x+1);
-				gets(aD[index].trustType.assets[x]);
+				gets((*trD)->assets[x]);
 				printf("\nAsset[%d] netAmount: ", x+1);
 				gets(scannedAmount);
 				
-				strcpy(aD[index].trustType.assetHistDate[x], __DATE__);
+				strcpy((*trD)->assetHistDate[x], __DATE__);
 				if(scanIfDigits(scannedAmount) == TRUE){
-				aD[index].trustType.assetAmtHistory[x] = atof(scannedAmount);
-				aD[index].trustType.assetAmount += aD[index].trustType.assetAmtHistory[x];
+				(*trD)->assetAmtHistory[x] = atof(scannedAmount);
+				(*trD)->assetAmount += (*trD)->assetAmtHistory[x];
 			
 				}
 				else{
@@ -89,17 +120,17 @@ void AddLedger(acctDet *aD, int index){
 	case 2:
 		for(int x = 0; x < PLIMIT && loopChoice == TRUE; x++){
 		system("cls");
-		if(aD[index].trustType.liabAmtHistory[x] == NULL){
+		if((*trD)->liabAmtHistory[x] == NULL){
 			printf("\nInput all your liabilities\n");
 			printf("\nLiability[%d] Description: ", x+1);
-			gets(aD[index].trustType.liabilities[x]);
+			gets((*trD)->liabilities[x]);
 			printf("\nLiability[%d] netAmount: ", x+1);
 			gets(scannedAmount);
 		
-			strcpy(aD[index].trustType.liabHistDate[x], __DATE__);
+			strcpy((*trD)->liabHistDate[x], __DATE__);
 			if(scanIfDigits(scannedAmount) == TRUE){
-				aD[index].trustType.liabAmtHistory[x] = atof(scannedAmount);
-				aD[index].trustType.liabAmount += aD[index].trustType.liabAmtHistory[x];
+				(*trD)->liabAmtHistory[x] = atof(scannedAmount);
+				(*trD)->liabAmount += (*trD)->liabAmtHistory[x];
 			}
 			else{
 				printf("\n\nError input, retry...");
@@ -121,7 +152,7 @@ void AddLedger(acctDet *aD, int index){
 		break;
 	}
 }
-void DeleteLedger(acctDet *aD, int index){
+void DeleteLedger(Trust**trD, char userId[]){
 	char searched[CHARLIMIT];
 	printf("\n\n");
 	switch(optLedger()){
@@ -131,15 +162,18 @@ void DeleteLedger(acctDet *aD, int index){
 		upperSentence(searched);
 		//find asset
 		for(int x = 0; x < PLIMIT; x++){
-			if(strcmp(aD[index].trustType.assets[x], searched) == 0){
+			if(strcmp((*trD)->assets[x], searched) == 0){
 				//re assign
 				for(int i = x; i < PLIMIT; i++){
-					strcpy(aD[index].trustType.assets[i], aD[index].trustType.assets[i+1]);
+					strcpy((*trD)->assets[i], (*trD)->assets[i+1]);
+					strcpy((*trD)->assetHistDate[i], (*trD)->assetHistDate[i+1]);
+					(*trD)->assetAmtHistory[i] = (*trD)->assetAmtHistory[i+1];
+					
 				}
 
 				break;
 			}
-			else{
+			else if(x == PLIMIT - 1){
 				printf("\nAsset doesn't exist!");
 			}
 		}
@@ -148,21 +182,20 @@ void DeleteLedger(acctDet *aD, int index){
 		printf("\nCopy the (DETAIL) you want to delete: ");
 		gets(searched);
 		upperSentence(searched);
-		//find asset
+		//find liability
 		for(int x = 0; x < PLIMIT; x++){
-			if(strcmp(aD[index].trustType.assets[x], searched) == 0){
+			if(strcmp((*trD)->liabilities[x], searched) == 0){
 				//re assign
 				for(int i = x; i < PLIMIT; i++){
-					if(aD[index].trustType.assets[i])
-						break;
-
-					strcpy(aD[index].trustType.assets[i], aD[index].trustType.assets[i+1]);
+					strcpy((*trD)->liabilities[i], (*trD)->liabilities[i+1]);
+					strcpy((*trD)->liabHistDate[i], (*trD)->liabHistDate[i+1]);
+					(*trD)->liabAmtHistory[i] = (*trD)->liabAmtHistory[i+1];
 				}
 
 				break;
 			}
-			else{
-				printf("\nLiability doesn't exist!");
+			else if(x == PLIMIT - 1){
+				printf("\Liability doesn't exist!");
 			}
 		}
 		break;
@@ -170,70 +203,65 @@ void DeleteLedger(acctDet *aD, int index){
 	}
 
 }
-void LinkAccount(acctDet *aD, int index){
+void LinkAccount(Trust** trD, acctDet *aD, FILE *acdb){
 	char inpID[CHARLIMIT];
 	printf("\n\n");
 	fflush(stdin);
 	printf("\nInput the Account ID you want to link: ");
-	gets(inpID);
+	scanf(" %s", inpID);
 	upperSentence(inpID);
-	if(getAcctIndex(aD, inpID) != NA){
-		strcpy(aD[index].trustType.linkedBankAcct, inpID);
-		printf("\nAccount successfully linked!!");
+
+	if(IdChecker(inpID, aD, acdb) == TRUE && aD->deleted == FALSE){
+		if(aD->type != TRUST){
+			memcpy((*trD)->linkedBankAcct, inpID, IDLIMIT);
+			(*trD)->linkedtype = aD->type;
+		}
+		else{
+			printf("\nLinked account shoudn't be a Trust Account");
+		}
 	}
 	else{
-		printf("\nAccount doesn't exist and can't link.");
+		printf("\n\nAccount doesn't exist!");
 	}
+	
 
 	getch();
 }
 
 
-void createTrust(acctDet *aD, int index){
+void createTrust(char userId[], acctDet *aD, Trust* trD){
 	int benChoice, loopChoice = TRUE;
 	char scannedAmount[CHARLIMIT];
-	aD[index].trustType.assetAmount = 0;
-	aD[index].trustType.liabAmount = 0;
+	trD->assetAmount = 0;
+	trD->liabAmount = 0;
 	
 
-	printf("\nTo have a Trust Account, there are following steps needs to be fulfilled...");
+	printf("\n\nTo have a Trust Account, there are following steps needs to be fulfilled...");
 
-	printf("\nPlease select which type of benefits");
+	printf("\nPlease select which type of benefits\n");
 	benChoice = optBenefits();
 
 
 	switch(benChoice){
 	case 1://Successor
-		aD[index].trustType.benefitType = SUCCESSOR;
+		trD->benefitType = SUCCESSOR;
 		
 		break;
 	case 2://scholarship
-		aD[index].trustType.benefitType = SCHOLARSHIP;
+		trD->benefitType = CHARITY;
 
 		break;
 	case 3://retirement plan
-		aD[index].trustType.benefitType = RETIREMENT_PLAN;
+		trD->benefitType = RETIREMENT;
 		break;
 	case 4:
 		printf("\n\nCancel account creation.");
-		deleteAccount(aD, index);
+		aD->deleted = TRUE;
+		getch();
 		return; //exit function
 		break;
 	}
 
-	printf("\nInput First name of benificiary: ");
-	gets(aD[index].trustType.beneficiaryInfo.pname.First);
-	printf("\nInput Last name of Beneficiary ");
-	gets(aD[index].trustType.beneficiaryInfo.pname.Last);
-	printf("\nInput the Middle/Initial name of Beneficiary: ");
-	gets(aD[index].trustType.beneficiaryInfo.pname.Middle);
-
-	printf("\nInput the City address: ");
-	gets(aD[index].trustType.beneficiaryInfo.city);
-	printf("\nInput his/her current address: ");
-	gets(aD[index].trustType.beneficiaryInfo.address);
-	printf("\nInput his/her age: ");
-	scanf(" %d", &aD[index].trustType.beneficiaryInfo.age);
 
 	system("cls");
 	fflush(stdout);
@@ -243,14 +271,14 @@ void createTrust(acctDet *aD, int index){
 		system("cls");
 		printf("\nInput all your assets you want to entrust\n");
 		printf("\nAsset[%d] Description: ", x+1);
-		gets(aD[index].trustType.assets[x]);
+		gets(trD->assets[x]);
 		printf("\nAsset[%d] netAmount: ", x+1);
 		gets(scannedAmount);
 		
-		strcpy(aD[index].trustType.assetHistDate[x], __DATE__);
+		strcpy(trD->assetHistDate[x], __DATE__);
 		if(scanIfDigits(scannedAmount) == TRUE){
-			aD[index].trustType.assetAmtHistory[x] = atof(scannedAmount);
-			aD[index].trustType.assetAmount += aD[index].trustType.assetAmtHistory[x];
+			trD->assetAmtHistory[x] = atof(scannedAmount);
+			trD->assetAmount += trD->assetAmtHistory[x];
 		
 		}
 		else{
@@ -279,14 +307,14 @@ void createTrust(acctDet *aD, int index){
 		system("cls");
 		printf("\nInput all your liabilities\n");
 		printf("\nLiability[%d] Description: ", x+1);
-		gets(aD[index].trustType.liabilities[x]);
+		gets(trD->liabilities[x]);
 		printf("\nLiability[%d] netAmount: ", x+1);
 		gets(scannedAmount);
 	
-		strcpy(aD[index].trustType.liabHistDate[x], __DATE__);
+		strcpy(trD->liabHistDate[x], __DATE__);
 		if(scanIfDigits(scannedAmount) == TRUE){
-			aD[index].trustType.liabAmtHistory[x] = atof(scannedAmount);
-			aD[index].trustType.liabAmount += aD[index].trustType.liabAmtHistory[x];
+			trD->liabAmtHistory[x] = atof(scannedAmount);
+			trD->liabAmount += trD->liabAmtHistory[x];
 		}
 		else{
 			printf("\n\nError input, retry...");
@@ -304,9 +332,6 @@ void createTrust(acctDet *aD, int index){
 			break;
 		}
 	}//////////////
-		break;
-	case 2:
-		//nothing
 		break;
 	}
 

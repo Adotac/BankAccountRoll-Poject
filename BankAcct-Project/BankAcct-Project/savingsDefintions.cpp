@@ -1,128 +1,68 @@
 #include "BA_header.h"
 
 //display savings account
-void displaySavings(acctDet *aD, char inpId[]){
-	int index = getAcctIndex(aD, inpId);
-	int opt = NULL, sFlag = TRUE;
-
-
-	if(index != NA){
-		do{
-			system("cls");
-			flushall();
-			printf("\n%s %s %s", aD[index].inf.pname.First, aD[index].inf.pname.Middle, aD[index].inf.pname.Last);
-			SavingsAcctHistory(aD, index);
-			opt = SavingMoneyOpts();
-			switch(opt){
-			case 1://Deposit
-				SavingsDeposit(aD, index);
-			
-				break;
-			case 2://Withdraw
-				SavingsWithdraw(aD, index);
-				
-				break;
-			case 3:
-				MoneyTransfer(aD, index);
-				break;
-			case 4:
-				sFlag = FALSE;
-				break;
-			default:
-				//loop
-				break;
-			
-			}
-		}while(sFlag == TRUE);
-		
-	}
+void displaySavings(char inpId[], Savings* svD, acctDet *aD, Time *tiD, FILE *acdb, FILE *svdb , FILE *tidb){
 	
-}
-// S Money options
-int SavingMoneyOpts(){
-	char key;
-	int iCtr = 1;
+	int opt = NULL, sFlag = TRUE; 
+
+	if(FindIdFileSetter(inpId, "FA, FS", acdb, aD, svdb, svD) != TRUE){
+		printf("\n\n\nError! Corrupted Account");
+		getch();
+		return;
+	}
 
 	do{
+		system("cls");
+		flushall();
+		printf("\n%s %s %s", aD->First, aD->Middle, aD->Last);
 
-		switch(iCtr){
-		case 1:
-			textHighllght("[DEPOSIT]");
-			printf("\t");
-			printf("[WITHDRAW]");
-			printf("\t");
-			printf("[MONEY TRANSFER]");
-			printf("\t");
-			printf("[EXIT]");
-			break;
-		case 2:
-			printf("[DEPOSIT]");
-			printf("\t");
-			textHighllght("[WITHDRAW]");
-			printf("\t");
-			printf("[MONEY TRANSFER]");
-			printf("\t");
-			printf("[EXIT]");
+		SavingsAcctHistory(svD);
+		opt = SavingMoneyOpts();
+
+		switch(opt){
+		case 1://Deposit
+			SavingsDeposit(svD);
+		
+				break;
+		case 2://Withdraw
+			SavingsWithdraw(svD);
+			
 			break;
 		case 3:
-			printf("[DEPOSIT]");
-			printf("\t");
-			printf("[WITHDRAW]");
-			printf("\t");
-			textHighllght("[MONEY TRANSFER]");
-			printf("\t");
-			printf("[EXIT]");
+			MoneyTransfer(inpId, svD, aD, tiD, acdb, svdb, tidb);
 			break;
 		case 4:
-			printf("[DEPOSIT]");
-			printf("\t");
-			printf("[WITHDRAW]");
-			printf("\t");
-			printf("[MONEY TRANSFER]");
-			printf("\t");
-			textHighllght("[EXIT]");
+			sFlag = FALSE;
 			break;
+		default:
+			//loop
+			break;
+			
+		}
+	}while(sFlag == TRUE);
 		
-		}
-
-		key = getch();
-		switch(key){
-		case LTARROW:
-			iCtr--;
-			if(iCtr < 1)
-				iCtr = 1;
-			break;
-		case RTARROW:
-			iCtr++;
-			if(iCtr > 4)
-				iCtr = 4;
-			break;
-		case ENTER:
-			return iCtr;
-			break;
-		}
 	
-	printf("\r");
-	}while(key != ENTER);
-
+	
 }
+
+
 //Savings Account
-void SavingsAcctHistory(acctDet *aD, int accIndex){
-	aD[accIndex].totalBalance = 0;
+void SavingsAcctHistory(Savings* svD){
+	svD->totalBalance = 0;
 	printf("\n||DEPOSITED AMOUNT\t||BRANCH\t||DATE\n");
 
 	for(int i = 0; i < PLIMIT; i++){
-		if(aD[accIndex].savingType.balance_history[i] != NULL){
-			printf("\n||%15.2f\t||%10s\t||%5s", aD[accIndex].savingType.balance_history[i], aD[accIndex].savingType.branch[i], aD[accIndex].savingType.date[i]);
-			aD[accIndex].totalBalance += aD[accIndex].savingType.balance_history[i];
+		if(svD->balance_history[i] != CNULL){
+			printf("\n||%15.2f\t||%10s\t||%5s", svD->balance_history[i], svD->branch[i], svD->date[i]);
+			svD->totalBalance += svD->balance_history[i];
 		}
 		else
 			break;	
 	}
-	printf("\n||Total: %15.2f\n\n", aD[accIndex].totalBalance);
+	printf("\n||Total: %15.2f\n\n", svD->totalBalance);
 	
 }
-void SavingsDeposit(acctDet *aD, int index){
+void SavingsDeposit(Savings* svD){
 	char scannedAmount[CHARLIMIT];
 	float amount;
 	system("cls");
@@ -134,10 +74,10 @@ void SavingsDeposit(acctDet *aD, int index){
 
 		//search slot in history
 		for(int i = 0; i < PLIMIT; i++){
-			if(aD[index].savingType.balance_history[i] == NULL){
-				aD[index].savingType.balance_history[i] = amount;
-				strcpy(aD[index].savingType.branch[i], currentBranch);
-				strcpy(aD[index].savingType.date[i], __DATE__);
+			if(svD->balance_history[i] == NULL){
+				svD->balance_history[i] = amount;
+				strcpy(svD->branch[i], currentBranch);
+				strcpy(svD->date[i], __DATE__);
 				break;
 			}
 		}
@@ -150,7 +90,7 @@ void SavingsDeposit(acctDet *aD, int index){
 	system("cls");
 	
 }
-void SavingsWithdraw(acctDet *aD, int index){
+void SavingsWithdraw(Savings* svD){
 	char scannedAmount[CHARLIMIT];
 	float amount;
 	system("cls");
@@ -159,14 +99,21 @@ void SavingsWithdraw(acctDet *aD, int index){
 	
 	if(scanIfDigits(scannedAmount) == TRUE){
 		amount = atof(scannedAmount);
+		if(amount > svD->totalBalance){
+			printf("\nYou don't have enough money!!");
+			getch();
+			return;
+		}
+
+
 		amount = -amount; //negative
 
 		//search slot in history
 		for(int i = 0; i < PLIMIT; i++){
-			if(aD[index].savingType.balance_history[i] == NULL){
-				aD[index].savingType.balance_history[i] = amount;
-				strcpy(aD[index].savingType.branch[i], currentBranch);
-				strcpy(aD[index].savingType.date[i], __DATE__);
+			if(svD->balance_history[i] == NULL){
+				svD->balance_history[i] = amount;
+				strcpy(svD->branch[i], currentBranch);
+				strcpy(svD->date[i], __DATE__);
 				break;
 			}
 		}
@@ -180,60 +127,106 @@ void SavingsWithdraw(acctDet *aD, int index){
 	system("cls");
 }
 
-void MoneyTransfer(acctDet *aD, int index){
+int createSav(){
+	float initial = 0;
+	system("cls");
+	printf("\nOne last step!");
+	printf("\nEnter an initial amount(any amount): ");
+	scanf(" %f", &initial);
+
+	if(initial < 0){
+		return NA;
+	}
+
+	return initial;
+}
+
+
+void MoneyTransfer(char userId[], Savings* svD, acctDet *aD, Time *tiD, FILE *acdb, FILE *svdb, FILE *tidb){
+	//SNULL if borrow
+	
 	char *inputT_ID, scannedAmount[CHARLIMIT];
 	inputT_ID = (char*)calloc(sizeof(char), IDLIMIT);
 	float transferAmt;
-	int t_index;
+
 	system("cls");
-	printf("\nEnter the ACCOUNT ID of which you want to Transfer to: ");
+
+	
+
+	printf("\nEnter the ACCOUNT ID of which you want for Transfer: ");
 	gets(inputT_ID);
 	upperSentence(inputT_ID);
 	printf("\nHow much amount do you want to Transfer: ");
 	gets(scannedAmount);
 
-	
+	if(scanIfDigits(scannedAmount) == FALSE){
+		printf("\nError in input, try again....");	
+		getch();
+		return;
+	}
+
+	//for time account borrow
+	if(strcmp(userId, SNULL) == 0){
+		memcpy(userId, inputT_ID, IDLIMIT);
+		printf("\n\nEnter your ACCOUNT ID: ");
+		fflush(stdin);
+		gets(inputT_ID);
+		upperSentence(inputT_ID);
+	}
+
 	transferAmt = atof(scannedAmount);
 
-	//search account
-	t_index = getAcctIndex(aD, inputT_ID);
-	if(t_index != NA){
-		
-			//search slot in history for user to transfer 
-		if(aD[t_index].type == SAVINGS){
-			//search slot in history for user
-			for(int i = 0; i < PLIMIT; i++){
-				if(aD[index].savingType.balance_history[i] == NULL){
-					aD[index].savingType.balance_history[i] = (-transferAmt);
-					strcpy(aD[index].savingType.branch[i], currentBranch);
-					strcpy(aD[index].savingType.date[i], __DATE__);
-					break;
-				}
-			}
-			for(int i = 0; i < PLIMIT; i++){
-				if(aD[t_index].savingType.balance_history[i] == NULL){
-					aD[t_index].savingType.balance_history[i] = transferAmt;
-					strcpy(aD[t_index].savingType.branch[i], currentBranch);
-					strcpy(aD[t_index].savingType.date[i], __DATE__);
-					break;
-				}
-			}
-			printf("\nTransfer Successful!");
-			printf("\n%.2f has been tranferred to %s", transferAmt, inputT_ID);
-		}
-		else if(aD[t_index].type == TIME){
+	if(IdChecker(inputT_ID, aD, acdb) == TRUE){
+		switch(aD->type){
+		case SAVINGS:
 			
-			aD[t_index].totalBalance += transferAmt;
+			//transacted account's history
+			if(FindIdFileSetter(inputT_ID, "FA,FS", acdb, aD,svdb, svD) == TRUE){
+				for(int i = 0; i < PLIMIT; i++){
+					if(svD->balance_history[i] == NULL){
+						svD->balance_history[i] = transferAmt;
+						strcpy(svD->branch[i], currentBranch);
+						strcpy(svD->date[i], __DATE__);
+						break;
+					}
+				}
+				printf("\nTransfer Successful!");
+				printf("\n%.2f has been tranferred to %s", transferAmt, inputT_ID);
 
-			printf("\nTransfer Successful!");
-			printf("\n%.2f has been tranferred to %s", transferAmt, inputT_ID);
-		//
-		}
-		else if(aD[t_index].type == TRUST){
-		//
+				UpdateFiles(inputT_ID, "FS", svdb, svD);
+			}
+
+			//reset to user's struct
+			//user's history
+			if(FindIdFileSetter(userId, "FA,FS", acdb, aD,svdb, svD) == TRUE){
+				for(int i = 0; i < PLIMIT; i++){
+					if(svD->balance_history[i] == NULL){
+						svD->balance_history[i] = (-transferAmt);
+						strcpy(svD->branch[i], currentBranch);
+						strcpy(svD->date[i], __DATE__);
+						break;
+					}
+				}
+			
+			}
+
+			UpdateFiles(inputT_ID, "FS", svdb, svD);
+			break;
+		case TIME:
+			if(FindIdFileSetter(inputT_ID, "FA,FI", acdb, aD,tidb, tiD) == TRUE){
+				tiD->totalBalance += transferAmt;
+
+				printf("\nTransfer Successful!");
+				printf("\n%.2f has been tranferred to %s", transferAmt, inputT_ID);
+				UpdateFiles(inputT_ID, "FI", tidb, tiD);
+			}
+			
+			break;
+		case TRUST:
+
 			printf("\nCannot Transfer to a Trust Account! Due to some regulations...");
+			break;
 		}
-		
 	}
 	else{
 		printf("\nAccount doesn't exist!! ");
