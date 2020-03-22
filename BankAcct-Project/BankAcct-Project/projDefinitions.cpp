@@ -53,6 +53,11 @@ void dateExtractor(char format, char *date, void *output){
 	case 'D'://day
 		token = strtok(date, " ");
 		token = strtok(NULL, " ");
+		if(strcmp(token, SNULL) == 0){
+			output = 0;
+			return;
+		}
+
 		*(int*)output = atoi(token);
 
 		break;
@@ -88,14 +93,14 @@ int pinGenerator(){
 	return pin;
 }
 void acctGenerator(acctDet* aD, Time *tiD, Trust *trD, Savings *svD, FILE *trdb, FILE *svdb, FILE *tidb, FILE *acdb){
-	int pin, regType;
+	int pin, regType;float n;
 	int glength = strlen(charGenerator);
 	int gIndex = rand() % glength;
 
 	regType = accountTypeReg(); // dont delete, important!
 
-	char gTemp, *arrTemp;
-	arrTemp = (char*)calloc(sizeof(char),IDLIMIT);
+	char gTemp, arrTemp[IDLIMIT];
+	arrTemp[IDLIMIT-1] = CNULL;
 	
 	//genrate ID
 	for(int i = 0; i < IDLIMIT; i++){
@@ -104,7 +109,7 @@ void acctGenerator(acctDet* aD, Time *tiD, Trust *trD, Savings *svD, FILE *trdb,
 
 		arrTemp[i] = gTemp;
 	}
-	arrTemp[IDLIMIT] = CNULL;
+	
 	
 
 	//search vacant slot
@@ -127,15 +132,17 @@ void acctGenerator(acctDet* aD, Time *tiD, Trust *trD, Savings *svD, FILE *trdb,
 			aD->type = TIME;
 			memcpy(tiD->acctID , aD->acctID, IDLIMIT);
 			strcpy(tiD->date, __DATE__);
-			strcpy(tiD->date, currentBranch);
+			strcpy(tiD->branch, currentBranch);
 
-			if(createTime() == NA){
+			n = createTime();
+			if(n == NA){
 				printf("\nTerminating creation of account due to invalid input...");
 				aD->deleted = TRUE;
 				getch();
 			}
 			else{
-				tiD->totalBalance += createTime();
+				tiD->totalBalance += n;
+				tiD->interestBalance = 12 * (tiD->totalBalance * INTEREST * TAX);
 			}
 
 			
@@ -146,13 +153,14 @@ void acctGenerator(acctDet* aD, Time *tiD, Trust *trD, Savings *svD, FILE *trdb,
 			aD->type = SAVINGS;
 			memcpy(svD->acctID , aD->acctID, IDLIMIT);
 
-			if(createSav() == NA){
+			n = createSav();
+			if(n == NA){
 				printf("\nTerminating creation of account due to invalid input...");
 				aD->deleted = TRUE;
 				getch();
 			}
 			else{
-				svD->totalBalance += createSav();
+				svD->totalBalance += n;
 			}
 
 			fseek(svdb, 0, SEEK_END);
@@ -171,6 +179,7 @@ void acctGenerator(acctDet* aD, Time *tiD, Trust *trD, Savings *svD, FILE *trdb,
 
 	fseek(acdb, 0, SEEK_END);
 	fwrite(aD, sizeof(struct AccountDetails), 1, acdb);
+	
 }
 
 void getInfo(acctDet* aD) {
@@ -221,7 +230,7 @@ return FALSE; //if account doesnt exist
 
 //sets all files to struct's Id
 int FindIdFileSetter(char searchId[], const char *format, ...){
-	FILE *ftemp = NULL;
+	FILE **ftemp = NULL;
 	acctDet *actemp = NULL;
 	Savings *svtemp = NULL;
 	Trust *trtemp = NULL;
@@ -241,13 +250,13 @@ int FindIdFileSetter(char searchId[], const char *format, ...){
 		switch(format[ctr]){
 		//FILE FORMAT
 		case 'F':
-			ftemp = va_arg(args, FILE*);
-			fseek(ftemp, 0, SEEK_SET);
+			ftemp = &va_arg(args, FILE*);
+			fseek(*ftemp, 0, SEEK_SET);
 			break;
 		//STRUCT FORMATS
 		case 'A'://acct details
 			actemp = va_arg(args, acctDet*);
-			while(fread(actemp, sizeof(acctDet), 1, ftemp) == 1){
+			while(fread(actemp, sizeof(acctDet), 1, *ftemp) == 1){
 				if(strcmp(searchId, actemp->acctID) == 0 && actemp->deleted == FALSE){
 					sflag = TRUE;
 					break;
@@ -258,7 +267,7 @@ int FindIdFileSetter(char searchId[], const char *format, ...){
 			break;
 		case 'S'://savings
 			svtemp = va_arg(args, SavingsDetails*);
-			while(fread(svtemp, sizeof(SavingsDetails), 1, ftemp) == 1){
+			while(fread(svtemp, sizeof(SavingsDetails), 1, *ftemp) == 1){
 				if(strcmp(searchId, svtemp->acctID) == 0 && actemp->deleted == FALSE){
 					sflag = TRUE;
 					break;
@@ -269,7 +278,7 @@ int FindIdFileSetter(char searchId[], const char *format, ...){
 			break;
 		case 'I'://time
 			titemp = va_arg(args, TimeDetails*);
-			while(fread(titemp, sizeof(TimeDetails), 1, ftemp) == 1){
+			while(fread(titemp, sizeof(TimeDetails), 1, *ftemp) == 1){
 				if(strcmp(searchId, titemp->acctID) == 0 && actemp->deleted == FALSE){
 					sflag = TRUE;
 					break;
@@ -280,7 +289,7 @@ int FindIdFileSetter(char searchId[], const char *format, ...){
 			break;
 		case 'R'://trust
 			trtemp = va_arg(args, TrustDetails*);
-			while(fread(trtemp, sizeof(TrustDetails), 1, ftemp) == 1){
+			while(fread(trtemp, sizeof(TrustDetails), 1, *ftemp) == 1){
 				if(strcmp(searchId, trtemp->acctID) == 0 && actemp->deleted == FALSE){
 					sflag = TRUE;
 					break;
@@ -526,8 +535,8 @@ void searchAcct(acctDet* aD, Savings *svD, Time *tiD, Trust *trD, FILE *acdb, FI
 		printf("\nInput Account Id: ");
 		scanf(" %s", input);
 		rewind(acdb);
-		if(IdChecker(input, aD, acdb) == TRUE && FindIdFileSetter(input, "FA", aD, acdb) == TRUE && aD->deleted == FALSE){
-			searchDisplay(aD, svD, tiD, trD);	
+		if(IdChecker(input, aD, acdb) == TRUE && FindIdFileSetter(input, "FA", acdb, aD) == TRUE && aD->deleted == FALSE){
+			searchDisplay(input, aD,svD, tiD, trD, acdb, svdb, tidb, trdb);	
 		}
 		else{
 			printf("\nAccount doesn't exist!!");
@@ -537,10 +546,11 @@ void searchAcct(acctDet* aD, Savings *svD, Time *tiD, Trust *trD, FILE *acdb, FI
 
 	getch();
 }
-void searchDisplay(acctDet *aD, Savings *svD, Time *tiD, Trust *trD){
+void searchDisplay(char input[], acctDet* aD, Savings *svD, Time *tiD, Trust *trD, FILE *acdb, FILE *svdb, FILE *tidb, FILE *trdb){
 	system("cls");
 	switch(aD->type){
 			case SAVINGS:
+				FindIdFileSetter(input, "FA,FS", acdb, aD, svdb, svD);
 				printf("\n%s %s %s", aD->First, aD->Middle, aD->Last);
 				printf("\n||DEPOSITED AMOUNT\t||BRANCH\t||DATE\n");
 
@@ -555,7 +565,7 @@ void searchDisplay(acctDet *aD, Savings *svD, Time *tiD, Trust *trD){
 				printf("\n||Total: %15.2f\n\n", svD->totalBalance);
 				break;
 			case TRUST:
-				
+				FindIdFileSetter(input, "FA,FR", acdb, aD, trdb, trD);
 				printf("\n%s %s %s", aD->First, aD->Middle, aD->Last);
 		
 				printf("\n\n------------ASSETS----------------\n");
@@ -582,6 +592,7 @@ void searchDisplay(acctDet *aD, Savings *svD, Time *tiD, Trust *trD){
 				printf("\n\nTotal NetAmount\n\n\n: %.2f", trD->totalBalance);
 				break;
 			case TIME:
+				FindIdFileSetter(input, "FA,FI", acdb, aD, tidb, tiD);
 				printf("\n%s %s %s", aD->First, aD->Middle, aD->Last);
 
 				printf("\nCurrent Balance: %.2f", tiD->totalBalance);

@@ -260,7 +260,7 @@ int optTime(acctDet *aD, Time *tiD){
 				break;
 			case 2:
 				printf("\n");printf("\t\t\t\t");
-				printf("[Check Money]");
+				printf("Check Money");
 				printf("\n");printf("\t\t\t\t");
 				textHighllght("[CALCULATE INTEREST]");
 				printf("\n");printf("\t\t\t\t");
@@ -270,7 +270,7 @@ int optTime(acctDet *aD, Time *tiD){
 				break;
 			case 3:
 				printf("\n");printf("\t\t\t\t");
-				printf("[Check Money]");
+				printf("Check Money");
 				printf("\n");printf("\t\t\t\t");
 				printf("CALCULATE INTEREST");
 				printf("\n");printf("\t\t\t\t");
@@ -280,7 +280,7 @@ int optTime(acctDet *aD, Time *tiD){
 				break;
 			case 4:
 				printf("\n");printf("\t\t\t\t");
-				printf("[Check Money]");
+				printf("Check Money");
 				printf("\n");printf("\t\t\t\t");
 				printf("CALCULATE INTEREST");
 				printf("\n");printf("\t\t\t\t");
@@ -289,6 +289,7 @@ int optTime(acctDet *aD, Time *tiD){
 				textHighllght("[BACK]");
 				break;
 			}
+			key = getch();
 			switch (key) {
 			case UPARROW:
 				choice--;
@@ -301,7 +302,7 @@ int optTime(acctDet *aD, Time *tiD){
 					choice = 1;
 				break;
 			}
-			key = getch();
+			
 		} while (key != ENTER);
 
 	return choice;

@@ -122,6 +122,7 @@ void checkMoney(char userId[], Savings* svD, acctDet *aD, Time *tiD, FILE *acdb,
 			textHighllght("[Back]");
 			break;
 		}
+		key = getch();
 		switch (key) {
 		case UPARROW:
 			choice--;
@@ -134,7 +135,7 @@ void checkMoney(char userId[], Savings* svD, acctDet *aD, Time *tiD, FILE *acdb,
 				choice = 1;
 			break;
 		}
-		key = getch();
+		
 	} while (key != ENTER);
 
 
@@ -152,7 +153,7 @@ void checkMoney(char userId[], Savings* svD, acctDet *aD, Time *tiD, FILE *acdb,
 
 void TimeDeposit(char userId[], Savings* svD, acctDet *aD, Time *tiD, FILE *acdb, FILE *svdb , FILE *tidb)
 {
-	if(FindIdFileSetter(userId, "FA,FI", tidb, tiD, acdb, aD) != TRUE){
+	if(FindIdFileSetter(userId, "FA,FI", acdb, aD, tidb, tiD) != TRUE){
 		printf("\n\n\nError! Corrupted Account");
 		getch();
 		return;

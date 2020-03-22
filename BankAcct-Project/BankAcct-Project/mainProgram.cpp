@@ -1,6 +1,22 @@
 #include "BA_header.h"
 
 
+/*
+
+Joshua Montero = File management, Savings, Trust Account and General Implementations
+
+Pete Tiongzon = UI implementation
+
+Jerick Cumayas = Time account Implementation
+
+
+
+
+
+
+*/
+
+
 int main(void){
 	srand(time(NULL));
 	FILE *acdb = fopen("acdb.bin", "rb+");

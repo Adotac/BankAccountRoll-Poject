@@ -6,6 +6,7 @@
 #include <ctype.h>
 #include <stdarg.h>
 
+//This is the admin password, user name: adminbk
 #define ADMPASS "0"
 #define NULL 0
 #define CNULL '\0'
@@ -126,7 +127,7 @@ int accountTypeReg();
 const char *typeIdentifier(accType);
 const char *trustIdentifier(Tbenefits);
 void deleteAccount(char userId[], acctDet* aD, FILE *acdb);
-void searchDisplay(acctDet *aD, Savings *svD, Time *tiD, Trust *trD);
+void searchDisplay(char input[], acctDet* aD, Savings *svD, Time *tiD, Trust *trD, FILE *acdb, FILE *svdb, FILE *tidb, FILE *trdb);
 
 void getInfo(acctDet*);
 

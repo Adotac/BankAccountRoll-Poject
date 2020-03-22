@@ -4,7 +4,7 @@
 void displayTrust(char inpuId[], acctDet *aD, Trust* trD, Savings *svD, Time *tiD, FILE *acdb, FILE *trdb, FILE *svdb, FILE *tidb){
 	int flag = TRUE;
 	
-	if(FindIdFileSetter(inpuId, "FR, FA", trdb, trD, acdb, aD) != TRUE){
+	if(FindIdFileSetter(inpuId, "FA, FR", acdb, aD, trdb, trD) != TRUE){
 		printf("\n\n\nError! Corrupted Account");
 		getch();
 		return;
@@ -35,9 +35,9 @@ void displayTrust(char inpuId[], acctDet *aD, Trust* trD, Savings *svD, Time *ti
 		printf("\nTotal Liabilities: %.2f", trD->liabAmount);
 		
 		
-		if(strcmp(trD->acctID, SNULL) != 0){
-			if(FindIdFileSetter(trD->acctID, "FA", acdb, aD) == TRUE)
-			printf("\nLinked Account: %s [%s]", trD->acctID, typeIdentifier(trD->linkedtype));
+		if(strcmp(trD->linkedBankAcct, SNULL) != 0){
+			if(FindIdFileSetter(trD->linkedBankAcct, "FA", acdb, aD) == TRUE)
+				printf("\nLinked Account: %s [%s]", trD->linkedBankAcct, typeIdentifier(trD->linkedtype));
 			
 			switch(trD->linkedtype){
 			case SAVINGS:
@@ -57,7 +57,7 @@ void displayTrust(char inpuId[], acctDet *aD, Trust* trD, Savings *svD, Time *ti
 		}
 		
 		trD->totalBalance = trD->assetAmount - trD->liabAmount;
-		printf("\n\nTotal NetAmount\n\n\n: %.2f", trD->totalBalance);
+		printf("\n\nTotal NetAmount: %.2f\n\n\n", trD->totalBalance);
 		switch(optTrust()){
 		case 1:
 			AddLedger(&trD, inpuId);
@@ -275,11 +275,11 @@ void createTrust(char userId[], acctDet *aD, Trust* trD){
 		printf("\nAsset[%d] netAmount: ", x+1);
 		gets(scannedAmount);
 		
-		strcpy(trD->assetHistDate[x], __DATE__);
+		
 		if(scanIfDigits(scannedAmount) == TRUE){
 			trD->assetAmtHistory[x] = atof(scannedAmount);
 			trD->assetAmount += trD->assetAmtHistory[x];
-		
+			strcpy(trD->assetHistDate[x], __DATE__);
 		}
 		else{
 			printf("\n\nError input, retry...");
@@ -298,8 +298,10 @@ void createTrust(char userId[], acctDet *aD, Trust* trD){
 		}
 	}
 
+	
 	system("cls");
 	printf("\nDo you have some Liabilities?\n");
+	loopChoice = TRUE;
 	switch(optYesNo()){
 	case 1:
 		//Liabilities
@@ -311,10 +313,11 @@ void createTrust(char userId[], acctDet *aD, Trust* trD){
 		printf("\nLiability[%d] netAmount: ", x+1);
 		gets(scannedAmount);
 	
-		strcpy(trD->liabHistDate[x], __DATE__);
+		
 		if(scanIfDigits(scannedAmount) == TRUE){
 			trD->liabAmtHistory[x] = atof(scannedAmount);
 			trD->liabAmount += trD->liabAmtHistory[x];
+			strcpy(trD->liabHistDate[x], __DATE__);
 		}
 		else{
 			printf("\n\nError input, retry...");
